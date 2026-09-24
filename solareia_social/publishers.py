@@ -9,7 +9,7 @@ from pathlib import Path
 
 import requests
 
-GRAPH_VERSION = os.getenv("META_GRAPH_VERSION", "v24.0")
+GRAPH_VERSION = os.getenv("META_GRAPH_VERSION", "v25.0")
 GRAPH = f"https://graph.facebook.com/{GRAPH_VERSION}"
 LINKEDIN_VERSION = os.getenv("LINKEDIN_VERSION", "202608")
 TIMEOUT = 60
@@ -210,3 +210,32 @@ def publish_instagram(text: str, image_urls: list[str]) -> dict:
         "Instagram publicar",
     ).json()
     return {"id": resp["id"]}
+
+
+def check_meta() -> list[str]:
+    """Comprueba las claves de Meta sin publicar nada. Devuelve líneas legibles con el resultado."""
+    page_id, token = _env("FACEBOOK_PAGE_ID"), _env("META_PAGE_ACCESS_TOKEN")
+    page = _check(
+        requests.get(f"{GRAPH}/{page_id}", params={"fields": "name,instagram_business_account", "access_token": token},
+                     timeout=TIMEOUT),
+        "Facebook: no se puede leer la página (revisa FACEBOOK_PAGE_ID y META_PAGE_ACCESS_TOKEN)",
+    ).json()
+    out = [f"✅ Facebook: conectado a la página «{page.get('name')}»"]
+    ig_expected = _env("INSTAGRAM_ACCOUNT_ID")
+    ig_linked = (page.get("instagram_business_account") or {}).get("id")
+    if ig_linked != ig_expected:
+        out.append(f"⚠️ Instagram: la página tiene vinculada la cuenta {ig_linked}, pero INSTAGRAM_ACCOUNT_ID es "
+                   f"{ig_expected}")
+    ig = _check(
+        requests.get(f"{GRAPH}/{ig_expected}", params={"fields": "username", "access_token": token}, timeout=TIMEOUT),
+        "Instagram: no se puede leer la cuenta (revisa INSTAGRAM_ACCOUNT_ID y los permisos)",
+    ).json()
+    out.append(f"✅ Instagram: conectado a @{ig.get('username')}")
+    limit = _check(
+        requests.get(f"{GRAPH}/{ig_expected}/content_publishing_limit",
+                     params={"fields": "quota_usage", "access_token": token}, timeout=TIMEOUT),
+        "Instagram: falta el permiso de publicación (instagram_content_publish)",
+    ).json()
+    out.append(f"✅ Instagram: permiso de publicación activo (publicaciones en 24 h: "
+               f"{(limit.get('data') or [{}])[0].get('quota_usage', 0)})")
+    return out

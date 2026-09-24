@@ -14,6 +14,10 @@ on:
         description: "Publicar aunque hoy no sea martes o jueves"
         type: boolean
         default: false
+      comprobar:
+        description: "Solo comprobar la conexión con las redes (no publica ni prueba el post)"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -50,6 +54,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
           GITHUB_REPOSITORY: ${{ github.repository }}
         run: |
+          if [ "${{ inputs.comprobar }}" = "true" ]; then python -m solareia_social.main check; exit $?; fi
           ARGS=""
           if [ "${{ inputs.dry_run }}" = "true" ]; then ARGS="$ARGS --dry-run"; fi
           if [ "${{ inputs.force }}" = "true" ]; then ARGS="$ARGS --force"; fi
@@ -64,7 +69,7 @@ jobs:
           if-no-files-found: ignore
 
       - name: Guardar historial en el repositorio
-        if: ${{ always() && !inputs.dry_run }}
+        if: ${{ always() && !inputs.dry_run && !inputs.comprobar }}
         run: |
           git config user.name "solareia-bot"
           git config user.email "solareia-bot@users.noreply.github.com"

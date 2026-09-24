@@ -309,6 +309,21 @@ def cmd_set_issue(args) -> int:
     return 0
 
 
+def cmd_check(args) -> int:
+    """Comprueba las claves de las redes activas sin publicar nada."""
+    from . import publishers as pub
+
+    ok = True
+    nets = enabled_networks()
+    if "facebook" in nets or "instagram" in nets:
+        try:
+            print("\n".join(pub.check_meta()))
+        except Exception as exc:
+            ok = False
+            print(f"❌ {exc}", file=sys.stderr)
+    return 0 if ok else 1
+
+
 def cmd_preview(args) -> int:
     out_dir = ROOT / "previews"
     for path in queued():
@@ -338,6 +353,8 @@ def main(argv=None) -> int:
     i.add_argument("post_id")
     i.add_argument("issue")
     i.set_defaults(func=cmd_set_issue)
+    c = sub.add_parser("check", help="Comprueba las claves de las redes sin publicar nada")
+    c.set_defaults(func=cmd_check)
     v = sub.add_parser("preview", help="Genera las imágenes de la cola en previews/")
     v.set_defaults(func=cmd_preview)
     args = parser.parse_args(argv)
