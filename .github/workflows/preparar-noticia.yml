@@ -1,0 +1,48 @@
+name: Preparar la noticia del jueves para validar
+
+on:
+  schedule:
+    # Miércoles 15:07 UTC (17:07 en Madrid en verano): redacta la noticia del jueves y abre una issue para aprobarla
+    - cron: "7 15 * * 3"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: solareia-redes
+  cancel-in-progress: false
+
+jobs:
+  preparar:
+    if: ${{ vars.NOTICIAS_REVISION != 'false' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Redactar la noticia con Claude
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: python -m solareia_social.main prepare-news
+      - name: Guardar y pedir aprobación
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ ! -f issue.md ]; then echo "Nada que validar"; exit 0; fi
+          git config user.name "solareia-bot"
+          git config user.email "solareia-bot@users.noreply.github.com"
+          git add content/queue
+          git commit -m "Noticia del jueves preparada para validar"
+          git push
+          POST_ID=$(git show --name-only --pretty= HEAD | grep -m1 '\.json$' | xargs basename | sed 's/\.json$//')
+          URL=$(gh issue create --title "$(cat issue_title.txt)" --body-file issue.md --assignee "${{ github.repository_owner }}")
+          python -m solareia_social.main set-issue "$POST_ID" "${URL##*/}"
+          git add content/queue
+          git commit -m "Issue de validación #${URL##*/}"
+          git push

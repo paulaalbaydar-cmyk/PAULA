@@ -2,3 +2,5 @@ __pycache__/
 *.pyc
 previews/
 .env
+issue.md
+issue_title.txt

@@ -17,6 +17,7 @@ on:
 
 permissions:
   contents: write
+  issues: read
 
 concurrency:
   group: solareia-redes
@@ -45,6 +46,9 @@ jobs:
           FACEBOOK_PAGE_ID: ${{ secrets.FACEBOOK_PAGE_ID }}
           INSTAGRAM_ACCOUNT_ID: ${{ secrets.INSTAGRAM_ACCOUNT_ID }}
           NETWORKS: ${{ vars.NETWORKS || 'linkedin,facebook,instagram' }}
+          NOTICIAS_REVISION: ${{ vars.NOTICIAS_REVISION || 'true' }}
+          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
         run: |
           ARGS=""
           if [ "${{ inputs.dry_run }}" = "true" ]; then ARGS="$ARGS --dry-run"; fi

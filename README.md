@@ -1,5 +1,8 @@
 # Solareia · Redes sociales automáticas
 
+> Proyecto compartido entre agentes (Claude Code y Codex): el contexto completo y el estado están en
+> [`AGENTS.md`](AGENTS.md).
+
 Publica **2 veces por semana** (martes y jueves) en:
 
 - **LinkedIn**: página de empresa de Solareia
@@ -30,18 +33,25 @@ prometer ahorros sin estudio, no decir que el servicio es gratuito, no mencionar
 ## Cómo funciona
 
 ```
-Domingo ────► "Preparar el consejo de la semana": Claude redacta el consejo del martes y lo deja
-               en content/queue/ para que lo revises o edites si quieres
-Martes 09:17 ► publica el consejo de la cola (carrusel + textos) en LinkedIn, Facebook e Instagram
-Jueves 09:17 ► Claude busca la actualidad de ese día, redacta la noticia y la publica
+Domingo ─────► "Preparar el consejo de la semana": Claude redacta el post del martes (consejo o servicio)
+                si no hay ninguno preparado, y lo deja en content/queue/ para revisarlo
+Martes 09:17 ► publica el post del martes en LinkedIn, Facebook e Instagram
+Miércoles ───► "Preparar la noticia del jueves": Claude redacta la noticia y abre una issue en GitHub con
+                el carrusel y los textos (te llega un email)
+Jueves 09:17 ► si la aprobaste, se publica; si no, no sale
 ```
 
-- En la cola puede haber posts completos o solo un **tema reservado** (un JSON con `fecha`, `tipo` y `tema`):
-  en ese caso el texto y el carrusel se redactan el mismo día con la información más reciente.
-- Una noticia que se retrasa más de 3 días ya no se publica (no se presenta una noticia antigua como nueva).
-- Si una red falla, las demás se publican igualmente. El post se queda en la cola con el error y al volver
-  a lanzar el workflow **solo se reintentan las redes que fallaron**. GitHub te avisa por email si algo falla.
-- Todo lo publicado queda guardado en `content/published/` (textos, imágenes e ID de cada publicación).
+**Para aprobar una noticia:** en la issue, añade la etiqueta `aprobado` o escribe un comentario que empiece por
+**ok** o **aprobado**. Solo cuenta la aprobación del propietario del repositorio. Si quieres cambios, edita el
+JSON enlazado en la issue antes del jueves. Para que las noticias se publiquen sin validar, crea la variable
+`NOTICIAS_REVISION` con el valor `false`.
+
+- En la cola puede haber posts completos o **temas reservados** (JSON con `fecha`, `tipo` y `tema`), que se
+  redactan con la información más reciente.
+- Una noticia que se retrasa más de 3 días ya no se publica.
+- Si una red falla, las demás se publican igualmente y al relanzar solo se reintentan las que fallaron.
+  GitHub te avisa por email si algo falla.
+- Todo lo publicado queda en `content/published/` (textos, imágenes e ID de cada publicación).
 
 ### Diseño de las imágenes
 

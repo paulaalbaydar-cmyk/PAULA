@@ -8,6 +8,8 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
+import re
 import shutil
 import sys
 from datetime import date, datetime, timedelta
@@ -18,6 +20,8 @@ from .config import PUBLISHED_DIR, QUEUE_DIR, ROOT, SCHEDULE, TUESDAY_ROTATION, 
 from .render import fit_to_feed, render_carousel
 
 MADRID = ZoneInfo("Europe/Madrid")
+# Si es true (variable NOTICIAS_REVISION), las noticias se preparan el día antes y solo se publican si las apruebas
+REVIEW_NEWS = os.getenv("NOTICIAS_REVISION", "true").lower() == "true"
 MAX_DELAY_DAYS = {"noticia": 3, "consejo": 30, "servicio": 30}  # una noticia retrasada más de 3 días ya no se publica
 
 
@@ -133,6 +137,31 @@ def publish_post(post: dict, image_sets: dict[str, list[Path]], dry_run: bool) -
     return ok
 
 
+APPROVAL_WORDS = ("aprobado", "aprobada", "aprobar", "ok", "vale", "sí", "si")
+
+
+def approved_on_github(issue: int) -> bool:
+    """La noticia está aprobada si la issue tiene la etiqueta 'aprobado' o un comentario del propietario
+    del repositorio que diga "aprobado", "ok", "vale" o "sí"."""
+    import requests
+
+    repo, token = os.getenv("GITHUB_REPOSITORY"), os.getenv("GITHUB_TOKEN")
+    if not repo or not token:
+        print("No hay acceso a GitHub para comprobar la aprobación")
+        return False
+    headers = {"Authorization": f"Bearer {token}", "Accept": "application/vnd.github+json"}
+    base = f"https://api.github.com/repos/{repo}/issues/{issue}"
+    data = requests.get(base, headers=headers, timeout=30).json()
+    if any(label.get("name", "").lower() == "aprobado" for label in data.get("labels", [])):
+        return True
+    owner = repo.split("/")[0].lower()
+    for c in requests.get(base + "/comments", headers=headers, timeout=30).json():
+        words = re.findall(r"\w+", (c.get("body") or "").lower())
+        if c.get("user", {}).get("login", "").lower() == owner and words and words[0] in APPROVAL_WORDS:
+            return True
+    return False
+
+
 def pick_from_queue(day: date, dry_run: bool):
     for path in queued():
         candidate = _load(path)
@@ -160,10 +189,20 @@ def cmd_publish(args) -> int:
     tipo = tipo or "consejo"
 
     queue_json, post = pick_from_queue(day, args.dry_run)
+    if post is not None and post.get("requiere_aprobacion") and not args.dry_run:
+        if not post.get("issue") or not approved_on_github(post["issue"]):
+            print(f"{post['id']}: pendiente de tu aprobación (issue #{post.get('issue')}); no se publica.")
+            return 0
     if post is not None and is_brief(post):
+        if REVIEW_NEWS and post.get("tipo") == "noticia" and not args.dry_run:
+            print(f"{post['id']}: las noticias necesitan aprobación y esta no se preparó a tiempo; no se publica.")
+            return 0
         print(f"Redactando el tema reservado para hoy: {post.get('tema')}")
         post = new_post(post.get("tipo", tipo), day, post.get("tema"), post.get("id"))
     elif post is None:
+        if REVIEW_NEWS and tipo == "noticia" and not args.dry_run:
+            print("No hay noticia aprobada para hoy; no se publica.")
+            return 0
         print(f"Cola vacía: generando un post de tipo '{tipo}' con Claude…")
         post = new_post(tipo, day)
 
@@ -217,6 +256,59 @@ def cmd_generate(args) -> int:
     return 0
 
 
+def cmd_prepare_news(args) -> int:
+    """Redacta la noticia de mañana, deja sus imágenes en la cola y escribe issue.md para pedir la aprobación."""
+    day = today_madrid() + timedelta(days=1)
+    if SCHEDULE.get(day.weekday()) != "noticia":
+        print(f"{day} no es día de noticia.")
+        return 0
+    brief_path = next((p for p in queued() if _load(p)["fecha"] == day.isoformat()), None)
+    brief = _load(brief_path) if brief_path else {}
+    if brief and not is_brief(brief):
+        print(f"Ya hay un post preparado para {day}: {brief_path.name}")
+        return 0
+    post = new_post("noticia", day, brief.get("tema"), brief.get("id"))
+    post["requiere_aprobacion"] = True
+    images = prepare_images(post, QUEUE_DIR)
+    post["imagenes"] = [p.name for p in images["default"]]
+    post["imagenes_linkedin"] = [p.name for p in images["linkedin"]]
+    if brief_path:
+        brief_path.unlink()
+    target = QUEUE_DIR / f"{post['id']}.json"
+    _save(post, target)
+    rel = target.relative_to(ROOT).as_posix()
+    repo = os.getenv("GITHUB_REPOSITORY", "")
+    raw = f"https://raw.githubusercontent.com/{repo}/HEAD/content/queue/"
+    lines = [
+        f"Publicación prevista: **{day.strftime('%d/%m/%Y')} a las 09:17** en LinkedIn, Facebook e Instagram.",
+        "",
+        "**Para aprobarla:** añade la etiqueta `aprobado` o escribe un comentario que empiece por **ok** o **aprobado**.",
+        f"Si quieres cambiar algo, edita [`{rel}`](https://github.com/{repo}/blob/HEAD/{rel}) antes de la hora o responde aquí "
+        "con los cambios. Si no se aprueba, no se publica.",
+        "",
+        "### Instagram y Facebook",
+        " ".join(f'<img src="{raw}{n}" width="260">' for n in post["imagenes"]),
+    ]
+    if post["imagenes_linkedin"] != post["imagenes"]:
+        lines += ["", "### LinkedIn", " ".join(f'<img src="{raw}{n}" width="260">' for n in post["imagenes_linkedin"])]
+    for net in ("linkedin", "facebook", "instagram"):
+        lines += ["", f"### Texto de {net.capitalize()}", "", "```text", post["textos"][net], "```"]
+    lines += ["", "Fuentes: " + ", ".join(post.get("fuentes", []))]
+    (ROOT / "issue.md").write_text("\n".join(lines), encoding="utf-8")
+    (ROOT / "issue_title.txt").write_text(f"Validar noticia del {day.strftime('%d/%m')}: {post.get('titulo')}",
+                                          encoding="utf-8")
+    print(f"Noticia preparada: {rel}")
+    return 0
+
+
+def cmd_set_issue(args) -> int:
+    path = QUEUE_DIR / f"{args.post_id}.json"
+    post = _load(path)
+    post["issue"] = int(args.issue)
+    _save(post, path)
+    return 0
+
+
 def cmd_preview(args) -> int:
     out_dir = ROOT / "previews"
     for path in queued():
@@ -240,6 +332,12 @@ def main(argv=None) -> int:
     p.set_defaults(func=cmd_publish)
     g = sub.add_parser("generate", help="Prepara los consejos de la próxima semana en la cola")
     g.set_defaults(func=cmd_generate)
+    n = sub.add_parser("prepare-news", help="Prepara la noticia de mañana para aprobarla")
+    n.set_defaults(func=cmd_prepare_news)
+    i = sub.add_parser("set-issue", help="Guarda el número de issue de aprobación de un post")
+    i.add_argument("post_id")
+    i.add_argument("issue")
+    i.set_defaults(func=cmd_set_issue)
     v = sub.add_parser("preview", help="Genera las imágenes de la cola en previews/")
     v.set_defaults(func=cmd_preview)
     args = parser.parse_args(argv)
