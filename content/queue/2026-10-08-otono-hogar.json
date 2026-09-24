@@ -1,0 +1,30 @@
+{
+  "id": "2026-10-08-otono-hogar",
+  "fecha": "2026-10-08",
+  "tipo": "consejo",
+  "categoria": "hogar",
+  "canva_design": "https://canva.link/nknmmopfrf12u9g",
+  "imagen_archivo": "2026-10-08-otono-hogar.jpg",
+  "imagen": {
+    "etiqueta": "Consejo · Hogar",
+    "titular": "5 claves para que el otoño no dispare tu factura",
+    "destacado": "5 claves",
+    "puntos": [
+      {"titulo": "1", "texto": "Lavadora y lavavajillas en las horas más baratas"},
+      {"titulo": "2", "texto": "Calefacción a 19-21 °C: cada grado de más, ~7% más de consumo"},
+      {"titulo": "3", "texto": "Revisa tu potencia contratada"},
+      {"titulo": "4", "texto": "Compara tus tarifas de luz y gas antes del invierno"},
+      {"titulo": "5", "texto": "Autoconsumo solar: bonificaciones en IBI e ICIO"}
+    ],
+    "cta": "Te ayudamos a ahorrar"
+  },
+  "textos": {
+    "linkedin": "🍂 5 claves para que el otoño no dispare la factura de casa\n\nCon la subida prevista de la tarifa regulada del gas y la luz en niveles altos, merece la pena prepararse antes del frío:\n\n1️⃣ Desplaza consumos a las horas más baratas: lavadora, lavavajillas u horno a mediodía o de madrugada si tienes PVPC o tarifa por tramos.\n2️⃣ Calefacción entre 19 y 21 °C: cada grado de más supone aproximadamente un 7% más de consumo.\n3️⃣ Revisa tu potencia contratada: muchos hogares pagan más potencia de la que necesitan.\n4️⃣ Compara tus tarifas de luz y gas antes del invierno, no cuando llegue la factura de enero.\n5️⃣ Si piensas en autoconsumo solar, recuerda que muchos ayuntamientos bonifican el IBI y el ICIO, y existen deducciones en el IRPF por mejoras de eficiencia.\n\nEn Solareia revisamos tus facturas y te decimos qué cambiar, sin vender por ninguna comercializadora.\n\n#AhorroEnergético #Hogar #Eficiencia #Autoconsumo #Solareia",
+    "facebook": "🍂 Llega el frío… ¡que no llegue también el susto en la factura!\n\n5 claves para ahorrar este otoño:\n1️⃣ Lavadora y lavavajillas en las horas más baratas\n2️⃣ Calefacción entre 19 y 21 °C (cada grado de más ≈ 7% más de consumo)\n3️⃣ Revisa tu potencia contratada\n4️⃣ Compara tus tarifas de luz y gas antes del invierno\n5️⃣ ¿Placas solares? Muchos ayuntamientos bonifican el IBI y el ICIO\n\n¿Quieres que miremos tu caso? Escríbenos y te ayudamos gratis 💬\n\n#Ahorro #Hogar #Energía #Solareia",
+    "instagram": "🍂 5 claves para que el otoño no dispare tu factura\n\n1️⃣ Lavadora y lavavajillas en horas baratas\n2️⃣ Calefacción a 19-21 °C (cada grado de más ≈ 7% más de consumo)\n3️⃣ Revisa tu potencia contratada\n4️⃣ Compara tus tarifas de luz y gas antes del invierno\n5️⃣ Autoconsumo solar: bonificaciones en IBI e ICIO\n\nGuárdate este post 📌 y compártelo con quien lo necesite.\n¿Revisamos tu factura? Escríbenos por mensaje directo ✉️\n\n#ahorroenergetico #ahorro #hogar #calefaccion #facturadelaluz #autoconsumo #placassolares #eficienciaenergetica #consejos #solareia"
+  },
+  "fuentes": [
+    "https://www.idae.es/",
+    "https://www.solarencasa.com/blog/ayudas-placas-solares-por-comunidad-2026"
+  ]
+}

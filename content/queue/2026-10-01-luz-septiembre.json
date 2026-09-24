@@ -1,0 +1,30 @@
+{
+  "id": "2026-10-01-luz-septiembre",
+  "fecha": "2026-10-01",
+  "tipo": "noticia",
+  "categoria": "luz",
+  "canva_design": "https://canva.link/6y4hrxtocvlp6aw",
+  "imagen_archivo": "2026-10-01-luz-septiembre.jpg",
+  "imagen": {
+    "etiqueta": "Noticia · Luz",
+    "titular": "La luz baja un 19% en septiembre… pero es el septiembre más caro en 4 años",
+    "destacado": "19%",
+    "puntos": [
+      {"titulo": "Factura media PVPC", "texto": "53,55 € (45,78 € en 2025)"},
+      {"titulo": "Precio medio", "texto": "189 €/MWh"},
+      {"titulo": "Impuestos", "texto": "IVA 21% + impuesto eléctrico 5,11% desde junio"}
+    ],
+    "fuente": "Energy News / Que.es, sept. 2026",
+    "cta": "Revisamos tu factura sin compromiso"
+  },
+  "textos": {
+    "linkedin": "⚡ La factura de la luz baja un 19% en septiembre… pero sigue siendo la más cara de los últimos cuatro septiembres.\n\nLos datos del mes para un hogar medio con tarifa regulada (PVPC):\n• Factura estimada: 53,55 € (frente a 45,78 € en 2025, 39,65 € en 2024 y 40,52 € en 2023).\n• Precio medio: unos 189 €/MWh.\n• La bajada respecto a agosto se debe sobre todo a un menor consumo, no a una energía más barata: el gas sigue en torno a 70 €/MWh y marca el precio en muchas horas.\n\nA esto se suma la fiscalidad: desde el 1 de junio el IVA de la electricidad volvió al 21% y el impuesto eléctrico al 5,11%, tras decaer anticipadamente la rebaja del Real Decreto-ley 7/2026.\n\n¿Qué puedes hacer?\n🔹 Desplazar consumos a las horas más baratas (en septiembre, la franja de mediodía ha llegado a costar 10 veces menos que la punta de la tarde).\n🔹 Revisar la potencia contratada: es un coste fijo que pagas aunque no consumas.\n🔹 Comparar tu tarifa antes del invierno.\n\nEn Solareia revisamos tu factura (hogar o empresa) de forma independiente y sin compromiso.\n\n#PrecioDeLaLuz #PVPC #Energía #AhorroEnergético #Solareia",
+    "facebook": "⚡ Buenas noticias a medias: la factura de la luz baja un 19% en septiembre respecto a agosto… pero es el septiembre más caro de los últimos 4 años.\n\n💶 Un hogar medio con PVPC pagará unos 53,55 € (el año pasado fueron 45,78 €).\n🧾 Y recuerda: desde junio el IVA de la luz vuelve a ser del 21% y el impuesto eléctrico del 5,11%.\n\n👉 Truco rápido: pon lavadora, lavavajillas y horno en las horas más baratas del día (normalmente a mediodía y de madrugada).\n\n¿Quieres que revisemos tu factura? Escríbenos, es gratis y sin compromiso 💬\n\n#PrecioLuz #Ahorro #Energía #Solareia",
+    "instagram": "⚡ La luz baja un 19% en septiembre… pero es el septiembre más caro en 4 años\n\n💶 Factura media PVPC: 53,55 € (45,78 € en 2025)\n📊 Precio medio: 189 €/MWh\n🧾 IVA al 21% e impuesto eléctrico al 5,11% desde junio\n\n💡 Consejo: concentra lavadoras, lavavajillas y horno en las horas más baratas del día.\n\n¿Pagas de más? Escríbenos por mensaje directo y revisamos tu factura sin compromiso ✉️\n\n#preciodelaluz #facturadelaluz #PVPC #ahorroenergetico #energia #ahorro #eficienciaenergetica #hogar #consultoriaenergetica #solareia"
+  },
+  "fuentes": [
+    "https://www.energynews.es/tarifa-de-la-luz-septiembre-2026/",
+    "https://www.que.es/2026/09/02/bajada-factura-luz-septiembre-2026/",
+    "https://www.newtral.es/iva-luz-gas-junio/20260529/"
+  ]
+}

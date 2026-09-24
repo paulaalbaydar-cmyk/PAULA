@@ -1,0 +1,46 @@
+name: Preparar borradores de la semana
+
+on:
+  schedule:
+    # Domingo 16:07 UTC: deja listos los posts del martes y jueves para revisarlos
+    - cron: "7 16 * * 0"
+  workflow_dispatch:
+    inputs:
+      count:
+        description: "Número de posts a preparar"
+        default: "2"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: solareia-redes
+  cancel-in-progress: false
+
+jobs:
+  preparar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Generar borradores con Claude
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          python -m solareia_social.main generate --count "${{ inputs.count || '2' }}"
+          python -m solareia_social.main preview
+      - uses: actions/upload-artifact@v4
+        with:
+          name: vista-previa-borradores
+          path: previews/
+      - name: Guardar borradores
+        run: |
+          git config user.name "solareia-bot"
+          git config user.email "solareia-bot@users.noreply.github.com"
+          git add content/queue
+          git diff --cached --quiet || git commit -m "Borradores de redes para la semana"
+          git push

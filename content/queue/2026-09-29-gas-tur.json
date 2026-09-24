@@ -1,0 +1,28 @@
+{
+  "id": "2026-09-29-gas-tur",
+  "fecha": "2026-09-29",
+  "tipo": "noticia",
+  "categoria": "gas",
+  "canva_design": "https://canva.link/kd40s0y2ttyt914",
+  "imagen_archivo": "2026-09-29-gas-tur.jpg",
+  "imagen": {
+    "etiqueta": "Noticia · Gas",
+    "titular": "La tarifa regulada del gas (TUR) podría subir un 54% el 1 de octubre",
+    "destacado": "54%",
+    "puntos": [
+      {"titulo": "Precio de la energía", "texto": "de 4,12 a ~6,95 cént/kWh (TUR.2)"},
+      {"titulo": "Hogar medio con calefacción", "texto": "de ~600 € a más de 900 €/año"}
+    ],
+    "fuente": "OCU, septiembre 2026",
+    "cta": "¿Te afecta? Te lo revisamos gratis"
+  },
+  "textos": {
+    "linkedin": "🔥 La tarifa regulada del gas (TUR) podría encarecerse un 54% a partir del 1 de octubre.\n\nSegún las estimaciones de la OCU, el precio de la energía de la TUR.2 (la más habitual en viviendas con calefacción) pasaría de 4,12 a unos 6,95 céntimos por kWh: un +69% en el término de energía que se traduce en un recibo final un 54% más caro.\n\n¿Qué significa en euros? Un hogar medio con calefacción de gas (unos 9.000 kWh/año) pasaría de pagar unos 600 € a más de 900 € al año, justo cuando empieza la temporada de calefacción.\n\nNuestra recomendación desde Solareia:\n✅ No cambies de tarifa a ciegas: incluso con la subida, la TUR sigue siendo competitiva frente a muchas ofertas del mercado libre.\n✅ Espera a conocer el precio oficial (se publica en el BOE a finales de septiembre) y compáralo con ofertas a precio fijo.\n✅ Si tienes un negocio con consumo de gas (hostelería, obradores, talleres), revisa ya tu contrato: el impacto en costes puede ser muy relevante este invierno.\n\nComo consultora energética independiente, no respondemos a ninguna comercializadora: analizamos tu caso y te decimos qué te conviene. ¿Hablamos?\n\nFuente: OCU (22/09/2026).\n\n#Gas #TUR #AhorroEnergético #Energía #Solareia",
+    "facebook": "🔥 ¡Atención si tienes calefacción de gas!\n\nLa tarifa regulada del gas (TUR) podría subir un 54% el 1 de octubre, según la OCU. Para un hogar medio con calefacción, eso supone pasar de unos 600 € a más de 900 € al año 😬\n\n👉 Nuestro consejo: no te cambies de tarifa a lo loco. La TUR sigue siendo de las opciones más baratas incluso con la subida. Espera al precio oficial y compara.\n\n¿No sabes si te conviene seguir en la TUR o pasarte a precio fijo? Escríbenos y te lo revisamos gratis y sin compromiso 💬\n\nFuente: OCU, septiembre 2026.\n\n#Gas #Calefacción #Ahorro #Solareia",
+    "instagram": "🔥 La TUR del gas podría subir un 54% el 1 de octubre\n\n📈 El precio de la energía pasaría de 4,12 a ~6,95 cént/kWh\n🏠 Un hogar medio con calefacción: de ~600 € a más de 900 € al año\n\n💡 Nuestro consejo: no cambies de tarifa sin comparar. La TUR sigue siendo competitiva incluso con la subida.\n\n¿Quieres saber qué te conviene? Escríbenos por mensaje directo y te revisamos la factura gratis ✉️\n\nFuente: OCU, sept. 2026\n\n#gas #tarifagas #TUR #calefaccion #ahorroenergetico #facturadelgas #energia #eficienciaenergetica #consultoriaenergetica #solareia"
+  },
+  "fuentes": [
+    "https://www.ocu.org/vivienda-y-energia/gas-luz/noticias/subida-tur-octubre-2026",
+    "https://www.infobae.com/espana/agencias/2026/09/22/la-factura-regulada-del-gas-podria-encarecerse-un-54-en-octubre-segun-la-ocu/"
+  ]
+}

@@ -1,0 +1,69 @@
+name: Publicar en redes (martes y jueves)
+
+on:
+  schedule:
+    # 07:17 UTC = 09:17 en Madrid en horario de verano (08:17 en invierno)
+    - cron: "17 7 * * 2,4"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Solo probar (no publica)"
+        type: boolean
+        default: true
+      force:
+        description: "Publicar aunque hoy no sea martes o jueves"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: solareia-redes
+  cancel-in-progress: false
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+
+      - name: Publicar
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
+          LINKEDIN_REFRESH_TOKEN: ${{ secrets.LINKEDIN_REFRESH_TOKEN }}
+          LINKEDIN_CLIENT_ID: ${{ secrets.LINKEDIN_CLIENT_ID }}
+          LINKEDIN_CLIENT_SECRET: ${{ secrets.LINKEDIN_CLIENT_SECRET }}
+          LINKEDIN_ORG_ID: ${{ secrets.LINKEDIN_ORG_ID }}
+          META_PAGE_ACCESS_TOKEN: ${{ secrets.META_PAGE_ACCESS_TOKEN }}
+          FACEBOOK_PAGE_ID: ${{ secrets.FACEBOOK_PAGE_ID }}
+          INSTAGRAM_ACCOUNT_ID: ${{ secrets.INSTAGRAM_ACCOUNT_ID }}
+          NETWORKS: ${{ vars.NETWORKS || 'linkedin,facebook,instagram' }}
+        run: |
+          ARGS=""
+          if [ "${{ inputs.dry_run }}" = "true" ]; then ARGS="$ARGS --dry-run"; fi
+          if [ "${{ inputs.force }}" = "true" ]; then ARGS="$ARGS --force"; fi
+          python -m solareia_social.main publish $ARGS
+
+      - name: Vista previa de la imagen
+        if: ${{ always() && inputs.dry_run }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: vista-previa
+          path: previews/
+          if-no-files-found: ignore
+
+      - name: Guardar historial en el repositorio
+        if: ${{ always() && !inputs.dry_run }}
+        run: |
+          git config user.name "solareia-bot"
+          git config user.email "solareia-bot@users.noreply.github.com"
+          git add content/
+          git diff --cached --quiet || git commit -m "Publicación en redes $(date +%F)"
+          git push
