@@ -98,7 +98,7 @@ de subir cambios, ejecuta `preview` y **mira las imágenes** (textos cortados, s
 - Mensajes de commit y textos en español.
 - Cualquier cambio de contenido publicado lo valida Paula.
 
-## Estado (actualizado el 24/09/2026)
+## Estado (actualizado el 24/09/2026, tras la validación)
 
 Hecho:
 - Automatización completa (generación, carruseles, publicación en las 3 redes, reintentos, histórico).
@@ -107,7 +107,8 @@ Hecho:
 - Página de revisión para Paula (artifact de claude.ai) con las vistas previas por red.
 
 Pendiente:
-- [ ] Paula valida los carruseles y textos de la cola (feedback por la página de revisión).
+- [x] Paula ha validado todos los carruseles y textos de la cola en las tres redes (campo `validado` en cada JSON).
+      Paula quiere validar las noticias antes de publicarlas (`NOTICIAS_REVISION=true`).
 - [ ] Paula configura los secretos de Meta, LinkedIn y Claude (pasos en el README).
 - [ ] Fusionar en `main`, que es desde donde GitHub ejecuta los workflows programados.
 - [ ] Primera prueba con "Solo probar" y después primera publicación real.
