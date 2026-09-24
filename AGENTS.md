@@ -109,7 +109,8 @@ Hecho:
 Pendiente:
 - [x] Paula ha validado todos los carruseles y textos de la cola en las tres redes (campo `validado` en cada JSON).
       Paula quiere validar las noticias antes de publicarlas (`NOTICIAS_REVISION=true`).
-- [ ] Paula configura los secretos de Meta, LinkedIn y Claude (pasos en el README).
+- [ ] Paula configura los secretos de Meta (en curso, con Claude in Chrome: sigue `docs/configurar-meta.md`),
+      LinkedIn y Claude (pasos en el README).
 - [x] La rama `claude/solareia-social-content-automation-kzsjz0` es hoy la rama por defecto del repositorio (la única),
       así que los workflows programados ya se ejecutan desde ella. Si se crea `main`, hay que hacerla la rama por defecto.
 - [ ] Primera prueba con "Solo probar" y después primera publicación real.
