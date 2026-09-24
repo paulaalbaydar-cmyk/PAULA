@@ -91,7 +91,7 @@ de subir cambios, ejecuta `preview` y **mira las imágenes** (textos cortados, s
 
 ## Reglas de colaboración entre agentes
 
-- Trabaja en una rama propia (`codex/...` o `claude/...`) y abre un PR; no subas directamente a `main`.
+- Trabaja en una rama propia (`codex/...` o `claude/...`) y abre un PR contra la rama por defecto; no subas directamente a ella.
 - Antes de empezar, lee el historial reciente (`git log`) y la sección "Estado" de abajo; al terminar, actualízala.
 - No cambies el formato JSON de los posts sin actualizar `render.py`, `generate.py`, `main.py` y este archivo.
 - No subas `previews/`, `issue.md` ni secretos. Las claves solo van en los secretos de GitHub Actions.
@@ -110,7 +110,8 @@ Pendiente:
 - [x] Paula ha validado todos los carruseles y textos de la cola en las tres redes (campo `validado` en cada JSON).
       Paula quiere validar las noticias antes de publicarlas (`NOTICIAS_REVISION=true`).
 - [ ] Paula configura los secretos de Meta, LinkedIn y Claude (pasos en el README).
-- [ ] Fusionar en `main`, que es desde donde GitHub ejecuta los workflows programados.
+- [x] La rama `claude/solareia-social-content-automation-kzsjz0` es hoy la rama por defecto del repositorio (la única),
+      así que los workflows programados ya se ejecutan desde ella. Si se crea `main`, hay que hacerla la rama por defecto.
 - [ ] Primera prueba con "Solo probar" y después primera publicación real.
 - [ ] Confirmar con Paula: si el estudio o revisión es gratuito, si la instalación de placas y cargadores se hace
       con instaladores colaboradores y si el Pack 360 se ofrece también a particulares.

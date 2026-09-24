@@ -132,7 +132,7 @@ Si quieres empezar solo con algunas redes, crea la **variable** (no secreto) `NE
 
 ### 4. Activar
 
-1. Fusiona esta rama en la rama principal del repositorio: GitHub solo ejecuta los workflows programados desde la rama por defecto.
+1. Comprueba que esta rama es la rama por defecto del repositorio (ahora mismo lo es, porque es la única): GitHub solo ejecuta los workflows programados desde la rama por defecto.
 2. Prueba en **Actions → Publicar en redes → Run workflow** con *Solo probar* marcado: verás los textos en el
    log y la imagen en *Artifacts → vista-previa*.
 3. Cuando todo esté bien, lánzalo sin *Solo probar* (y con *force* si no es martes ni jueves) para una
