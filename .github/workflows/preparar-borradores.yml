@@ -1,14 +1,11 @@
-name: Preparar borradores de la semana
+name: Preparar el consejo de la semana
 
 on:
   schedule:
-    # Domingo 16:07 UTC: deja listos los posts del martes y jueves para revisarlos
+    # Domingo 16:07 UTC: deja listo el consejo del martes para revisarlo
+    # (la noticia del jueves se redacta el mismo jueves para que sea actual)
     - cron: "7 16 * * 0"
   workflow_dispatch:
-    inputs:
-      count:
-        description: "Número de posts a preparar"
-        default: "2"
 
 permissions:
   contents: write
@@ -31,7 +28,7 @@ jobs:
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
-          python -m solareia_social.main generate --count "${{ inputs.count || '2' }}"
+          python -m solareia_social.main generate
           python -m solareia_social.main preview
       - uses: actions/upload-artifact@v4
         with:

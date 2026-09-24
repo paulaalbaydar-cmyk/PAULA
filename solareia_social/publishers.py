@@ -1,6 +1,7 @@
 """Publicación en LinkedIn (página de empresa), Facebook (página) e Instagram (cuenta profesional)."""
 from __future__ import annotations
 
+import json
 import os
 import re
 import time
@@ -67,15 +68,7 @@ def _linkedin_token() -> str:
     return _env("LINKEDIN_ACCESS_TOKEN")
 
 
-def publish_linkedin(text: str, image: Path, title: str) -> dict:
-    token = _linkedin_token()
-    org = _env("LINKEDIN_ORG_ID")
-    author = org if org.startswith("urn:") else f"urn:li:organization:{org}"
-    headers = {
-        "Authorization": f"Bearer {token}",
-        "LinkedIn-Version": LINKEDIN_VERSION,
-        "X-Restli-Protocol-Version": "2.0.0",
-    }
+def _linkedin_upload(image: Path, author: str, token: str, headers: dict) -> str:
     init = _check(
         requests.post(
             "https://api.linkedin.com/rest/images?action=initializeUpload",
@@ -94,12 +87,30 @@ def publish_linkedin(text: str, image: Path, title: str) -> dict:
         ),
         "LinkedIn subida de imagen",
     )
+    return init["image"]
+
+
+def publish_linkedin(text: str, images: list[Path], title: str) -> dict:
+    token = _linkedin_token()
+    org = _env("LINKEDIN_ORG_ID")
+    author = org if org.startswith("urn:") else f"urn:li:organization:{org}"
+    headers = {
+        "Authorization": f"Bearer {token}",
+        "LinkedIn-Version": LINKEDIN_VERSION,
+        "X-Restli-Protocol-Version": "2.0.0",
+    }
+    urns = [_linkedin_upload(img, author, token, headers) for img in images]
+    if len(urns) == 1:
+        content = {"media": {"title": title[:200], "id": urns[0]}}
+    else:  # carrusel de imágenes (2 a 20)
+        content = {"multiImage": {"images": [{"id": u, "altText": f"{title[:100]} ({i})"}
+                                             for i, u in enumerate(urns, 1)]}}
     body = {
         "author": author,
         "commentary": linkedin_commentary(text),
         "visibility": "PUBLIC",
         "distribution": {"feedDistribution": "MAIN_FEED", "targetEntities": [], "thirdPartyDistributionChannels": []},
-        "content": {"media": {"title": title[:200], "id": init["image"]}},
+        "content": content,
         "lifecycleState": "PUBLISHED",
         "isReshareDisabledByAuthor": False,
     }
@@ -112,19 +123,35 @@ def publish_linkedin(text: str, image: Path, title: str) -> dict:
 
 # ---------------------------------------------------------------- Facebook
 
-def publish_facebook(text: str, image: Path, published: bool = True) -> dict:
+def upload_facebook_photo(image: Path, published: bool = False, message: str | None = None) -> dict:
     page_id, token = _env("FACEBOOK_PAGE_ID"), _env("META_PAGE_ACCESS_TOKEN")
+    data = {"access_token": token, "published": str(published).lower()}
+    if message:
+        data["message"] = message
     with image.open("rb") as fh:
-        resp = _check(
+        return _check(
             requests.post(
                 f"{GRAPH}/{page_id}/photos",
-                data={"message": text, "access_token": token, "published": str(published).lower()},
+                data=data,
                 files={"source": (image.name, fh, "image/jpeg")},
                 timeout=TIMEOUT,
             ),
             "Facebook subir foto",
         ).json()
-    return {"id": resp.get("post_id") or resp.get("id"), "photo_id": resp["id"]}
+
+
+def publish_facebook(text: str, images: list[Path]) -> dict:
+    """Publica en la página. Con varias imágenes crea una publicación con todas las fotos."""
+    if len(images) == 1:
+        resp = upload_facebook_photo(images[0], published=True, message=text)
+        return {"id": resp.get("post_id") or resp["id"], "photo_ids": [resp["id"]]}
+    page_id, token = _env("FACEBOOK_PAGE_ID"), _env("META_PAGE_ACCESS_TOKEN")
+    photo_ids = [upload_facebook_photo(img)["id"] for img in images]
+    data = {"message": text, "access_token": token}
+    for i, pid in enumerate(photo_ids):
+        data[f"attached_media[{i}]"] = json.dumps({"media_fbid": pid})
+    resp = _check(requests.post(f"{GRAPH}/{page_id}/feed", data=data, timeout=TIMEOUT), "Facebook publicar").json()
+    return {"id": resp["id"], "photo_ids": photo_ids}
 
 
 def facebook_photo_url(photo_id: str) -> str:
@@ -140,17 +167,8 @@ def facebook_photo_url(photo_id: str) -> str:
 
 # ---------------------------------------------------------------- Instagram
 
-def publish_instagram(text: str, image_url: str) -> dict:
-    ig_id, token = _env("INSTAGRAM_ACCOUNT_ID"), _env("META_PAGE_ACCESS_TOKEN")
-    container = _check(
-        requests.post(
-            f"{GRAPH}/{ig_id}/media",
-            data={"image_url": image_url, "caption": text, "access_token": token},
-            timeout=TIMEOUT,
-        ),
-        "Instagram crear contenedor",
-    ).json()["id"]
-    for _ in range(30):
+def _ig_wait(container: str, token: str) -> None:
+    for _ in range(36):
         status = _check(
             requests.get(
                 f"{GRAPH}/{container}", params={"fields": "status_code", "access_token": token}, timeout=TIMEOUT
@@ -158,10 +176,31 @@ def publish_instagram(text: str, image_url: str) -> dict:
             "Instagram estado del contenedor",
         ).json().get("status_code")
         if status == "FINISHED":
-            break
+            return
         if status in ("ERROR", "EXPIRED"):
             raise PublishError(f"Instagram: el contenedor terminó en estado {status}")
         time.sleep(5)
+    raise PublishError("Instagram: el contenedor no terminó de procesarse a tiempo")
+
+
+def publish_instagram(text: str, image_urls: list[str]) -> dict:
+    """Publica una imagen o un carrusel (2 a 10 imágenes) a partir de URLs públicas."""
+    ig_id, token = _env("INSTAGRAM_ACCOUNT_ID"), _env("META_PAGE_ACCESS_TOKEN")
+
+    def create(data: dict) -> str:
+        return _check(
+            requests.post(f"{GRAPH}/{ig_id}/media", data={**data, "access_token": token}, timeout=TIMEOUT),
+            "Instagram crear contenedor",
+        ).json()["id"]
+
+    if len(image_urls) == 1:
+        container = create({"image_url": image_urls[0], "caption": text})
+    else:
+        children = [create({"image_url": url, "is_carousel_item": "true"}) for url in image_urls[:10]]
+        for child in children:
+            _ig_wait(child, token)
+        container = create({"media_type": "CAROUSEL", "children": ",".join(children), "caption": text})
+    _ig_wait(container, token)
     resp = _check(
         requests.post(
             f"{GRAPH}/{ig_id}/media_publish",

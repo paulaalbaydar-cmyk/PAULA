@@ -1,0 +1,61 @@
+{
+  "id": "2026-10-06-consejo-horarios",
+  "fecha": "2026-10-06",
+  "tipo": "consejo",
+  "categoria": "hogar",
+  "seccion": "Consejos",
+  "titulo": "¿Te ayuda cambiar tus horarios de consumo?",
+  "diapositivas": [
+    {
+      "tipo": "portada",
+      "titular": "¿Te ayuda cambiar tus horarios?",
+      "destacado": "tus horarios?",
+      "subtitulo": "3 comprobaciones antes de moverlo todo",
+      "texto": "Depende de tu tarifa y de tus hábitos."
+    },
+    {
+      "tipo": "lista",
+      "titular": "Mira tu tarifa",
+      "destacado": "tu tarifa",
+      "items": [
+        {
+          "num": "01",
+          "titulo": "¿Tu precio cambia por horas?",
+          "texto": "Con PVPC o tarifa por tramos, sí influye."
+        },
+        {
+          "num": "02",
+          "titulo": "¿Conoces los tramos?",
+          "texto": "Punta: 10-14 h y 18-22 h entre semana."
+        }
+      ]
+    },
+    {
+      "tipo": "lista",
+      "titular": "Mira tu consumo",
+      "destacado": "tu consumo",
+      "items": [
+        {
+          "num": "03",
+          "titulo": "¿Qué puedes mover?",
+          "texto": "Lavadora, lavavajillas, carga del coche."
+        },
+        {
+          "num": "04",
+          "titulo": "¿Cuánto gastas en punta?",
+          "texto": "Lo verás en tu factura o en tu distribuidora."
+        }
+      ],
+      "cta": "Guárdalo y revisa tu próxima factura"
+    }
+  ],
+  "textos": {
+    "linkedin": "⚡ ¿Mover el consumo a otras horas ayuda a pagar menos? Depende.\n\nSolo tiene sentido si tu precio cambia según la hora. Con el PVPC o con una tarifa por tramos, la energía y los peajes son más caros en punta (de 10 a 14 h y de 18 a 22 h, de lunes a viernes) y más baratos en valle (de 0 a 8 h, fines de semana y festivos nacionales). Con un precio fijo 24 horas, el horario no cambia lo que pagas por la energía.\n\nPara un negocio, antes de reorganizar procesos conviene revisar:\n• Qué parte del consumo cae hoy en punta.\n• Qué equipos o tareas pueden desplazarse sin afectar a la actividad.\n• Si la tarifa contratada encaja con el nuevo perfil de consumo.\n\nLos datos horarios están en el área de clientes de tu distribuidora y son la mejor base para decidir.\n\n¿Has cambiado algún horario de trabajo o de equipos para ahorrar energía? ¿Qué resultado te ha dado?\n\n📩 info@wearesolareia.com\n\n#Solareia #EficienciaEnergética #FacturaDeLaLuz #Empresas",
+    "facebook": "⚡ ¿Poner la lavadora por la noche te ahorra dinero?\n\nDepende de tu tarifa. Si tienes PVPC o una tarifa por tramos horarios, sí influye: las horas más caras son de 10 a 14 h y de 18 a 22 h entre semana, y las más baratas, de madrugada, los fines de semana y los festivos. Con un precio fijo las 24 horas, el horario no cambia el precio de la energía.\n\nEn el carrusel te dejamos 4 comprobaciones rápidas para saber si te compensa 💚\n\n¿Tú ya ajustas tus horarios de consumo? Cuéntanos qué aparatos mueves.\n\n📩 info@wearesolareia.com\n\n#Solareia #AhorroEnergético #FacturaDeLaLuz",
+    "instagram": "⚡ ¿Te ayuda cambiar tus horarios de consumo?\n\nDepende de tu tarifa:\n✅ PVPC o tarifa por tramos: sí influye.\n✅ Precio fijo 24 h: la hora no cambia el precio de la energía.\n\nHoras punta: 10-14 h y 18-22 h entre semana.\nHoras valle: de 0 a 8 h, fines de semana y festivos.\n\nGuarda este carrusel y revísalo con tu próxima factura 📌\n\n📩 info@wearesolareia.com\n\n#Solareia #AhorroEnergético #ConsejosDeAhorro #FacturaDeLaLuz #Hogar"
+  },
+  "fuentes": [
+    "https://www.cnmc.es/ambitos-de-actuacion/energia/mercado-electrico",
+    "https://www.boe.es/buscar/doc.php?id=BOE-A-2020-1066"
+  ]
+}

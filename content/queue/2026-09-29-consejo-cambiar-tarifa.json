@@ -1,0 +1,32 @@
+{
+  "id": "2026-09-29-consejo-cambiar-tarifa",
+  "fecha": "2026-09-29",
+  "tipo": "consejo",
+  "categoria": "tarifas",
+  "seccion": "Consejos",
+  "titulo": "4 preguntas antes de cambiar de tarifa de luz",
+  "diapositivas": [
+    {"tipo": "portada", "titular": "¿Vas a cambiar de tarifa de luz?", "destacado": "de tarifa de luz?",
+     "subtitulo": "4 preguntas antes de contratar", "texto": "Compara con toda la información."},
+    {"tipo": "lista", "titular": "El precio y los extras", "destacado": "y los extras",
+     "items": [
+       {"num": "01", "titulo": "¿Cuándo puede cambiar el precio?", "texto": "Revisa cómo se actualiza."},
+       {"num": "02", "titulo": "¿Qué servicios adicionales pagas?", "texto": "Comprueba el coste completo."}
+     ]},
+    {"tipo": "lista", "titular": "Tu contrato, tu consumo", "destacado": "tu consumo",
+     "items": [
+       {"num": "03", "titulo": "¿Hay permanencia?", "texto": "Lee las condiciones de cancelación."},
+       {"num": "04", "titulo": "¿Encaja con tus horarios?", "texto": "Compara según tu consumo."}
+     ],
+     "cta": "Guárdalo para tu próxima renovación"}
+  ],
+  "textos": {
+    "linkedin": "⚡ Antes de aceptar una oferta de luz, haz estas cuatro preguntas:\n\n1. ¿Cómo y cuándo puede cambiar el precio?\n2. ¿Incluye algún servicio adicional de pago?\n3. ¿Hay permanencia o condiciones de cancelación?\n4. ¿Cómo encaja con mi consumo y mis horarios?\n\nUna comparación útil tiene que incluir las condiciones del contrato y el coste completo de la oferta.\n\nEn Solareia te ayudamos a entender qué estás contratando y a comparar opciones según las necesidades de tu suministro.\n\n¿Qué parte de una oferta energética te cuesta más comparar?\n\n📩 info@wearesolareia.com\n\n#Solareia #ConsultoríaEnergética #FacturaDeLaLuz #Empresas",
+    "facebook": "⚡ ¿Estás pensando en cambiar de tarifa de luz?\n\nAntes de aceptar una oferta, revisa cuándo puede cambiar el precio, si incluye servicios adicionales, las condiciones de cancelación y cómo encaja con tus horarios de consumo.\n\nEn el carrusel te dejamos cuatro preguntas para comparar con toda la información.\n\n💚 Guarda esta guía para tu próxima renovación o compártela con alguien a quien le venga bien.\n\n¿Tienes dudas? Escríbenos a info@wearesolareia.com.\n\n#Solareia #FacturaDeLaLuz #ConsejosDeAhorro",
+    "instagram": "⚡ ¿Te han ofrecido una nueva tarifa de luz?\n\nAntes de decir que sí, revisa:\n\n✅ Cuándo pueden cambiar el precio.\n✅ Qué extras te cobran.\n✅ Si hay permanencia.\n✅ Si encaja con tus horarios de consumo.\n\nGuarda este post para tu próxima renovación y escríbenos si necesitas ayuda para comparar.\n\n📩 info@wearesolareia.com\n\n#Solareia #AhorroEnergético #TarifaDeLuz #ConsejosDeAhorro"
+  },
+  "fuentes": [
+    "https://www.cnmc.es/sites/default/files/editor_contenidos/Energia/Guias/CNMC_RECOM_CONSUMIDOR.pdf",
+    "https://www.cnmc.es/en/node/406175"
+  ]
+}

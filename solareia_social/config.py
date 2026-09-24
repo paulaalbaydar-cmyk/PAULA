@@ -10,13 +10,13 @@ PUBLISHED_DIR = ROOT / "content" / "published"
 ASSETS_DIR = ROOT / "assets"
 FONTS_DIR = ASSETS_DIR / "fonts"
 LOGO_PATH = ASSETS_DIR / "logo.png"  # logo completo para fondo oscuro (menta + blanco)
+MARK_PATH = ASSETS_DIR / "logo-mark.png"  # isotipo, se usa como ilustración
 
 # Identidad de wearesolareia.com / tarifasluzbaratas.com (variables --sl-* de estilo-solareia.css)
 BRAND = {
     "name": "SOLAREIA",
     "tagline": "Energy consulting",
-    "bg_top": "#001516",
-    "bg_bottom": "#014044",
+    "bg": "#014044",
     "brand_2": "#025A5F",
     "mint": "#8CFFB9",
     "accent": "#60C495",
@@ -26,6 +26,7 @@ BRAND = {
     "sun_from": "#FFAA00",
     "sun_to": "#E8F31A",
     "ink": "#001516",
+    "email": "info@wearesolareia.com",
     "web": os.getenv("SOLAREIA_WEB", "wearesolareia.com"),
     "instagram": "@solareiaconsulting",
 }
@@ -34,17 +35,27 @@ BRAND = {
 IMAGE_SIZE = (1080, 1350)
 
 # Calendario: día de la semana (0=lunes) -> tipo de publicación
-# Martes = noticia del sector, jueves = consejo de ahorro
-SCHEDULE = {1: "noticia", 3: "consejo"}
+# Martes = consejo práctico, jueves = noticia del sector (si no hay novedad contrastada, otro consejo)
+SCHEDULE = {1: "consejo", 3: "noticia"}
 
 # Rotación de temas para que el contenido sea variado
 NEWS_TOPICS = [
     "precio de la luz (PVPC, mercado mayorista, previsiones)",
     "gas natural (TUR, precios, mercado)",
     "impuestos y regulación (IVA, impuesto eléctrico, peajes y cargos CNMC, BOE)",
-    "energías renovables y autoconsumo (ayudas, normativa, récords, baterías)",
+    "energías renovables y autoconsumo (ayudas, normativa, récords, almacenamiento)",
+    "novedad internacional explicada en lenguaje sencillo (AIE, UE, mercados)",
 ]
-TIP_AUDIENCES = ["particulares (hogares)", "empresas, pymes y hostelería"]
+TIP_TOPICS = [
+    "qué revisar antes de aceptar una oferta de luz o gas",
+    "cómo saber si cambiar el horario de consumo te puede ayudar",
+    "qué mirar en la factura cuando llega una renovación",
+    "potencia contratada: cómo saber si es la adecuada",
+    "hábitos de consumo y eficiencia según la época del año",
+    "dudas frecuentes sobre la factura de la luz o el gas",
+    "autoconsumo solar: qué valorar antes de instalar",
+]
+TIP_AUDIENCES = ["hogares", "pequeños negocios y empresas"]
 
 NETWORKS = ("linkedin", "facebook", "instagram")
 

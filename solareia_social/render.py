@@ -3,9 +3,9 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from PIL import Image, ImageDraw, ImageFilter, ImageFont
+from PIL import Image, ImageDraw, ImageFont
 
-from .config import BRAND, FONTS_DIR, IMAGE_SIZE, LOGO_PATH
+from .config import BRAND, FONTS_DIR, IMAGE_SIZE, LOGO_PATH, MARK_PATH
 
 W, H = IMAGE_SIZE
 MARGIN = 80
@@ -24,11 +24,6 @@ def _font(size: int, kind: str = "body") -> ImageFont.FreeTypeFont:
 
 def _text_w(draw: ImageDraw.ImageDraw, text: str, font) -> float:
     return draw.textlength(text, font=font)
-
-
-def _rgb(hex_color: str) -> tuple[int, int, int]:
-    h = hex_color.lstrip("#")
-    return tuple(int(h[i : i + 2], 16) for i in (0, 2, 4))
 
 
 def _wrap_rich(draw, runs, max_width):
@@ -73,128 +68,205 @@ def _draw_lines(draw, lines, x, y, line_height):
 
 def _headline_runs(titular: str, destacado: str | None, font):
     white, mint = BRAND["text"], BRAND["mint"]
+    titular = titular.upper()
+    destacado = (destacado or "").upper()
     if destacado and destacado in titular:
         before, after = titular.split(destacado, 1)
         return [(before, font, white), (destacado, font, mint), (after, font, white)]
     return [(titular, font, white)]
 
 
-def _background() -> Image.Image:
-    """Degradado petróleo (#001516 → #014044) con un halo menta suave, como en la web."""
-    top, bottom = _rgb(BRAND["bg_top"]), _rgb(BRAND["bg_bottom"])
-    grad = Image.new("RGB", (1, H))
-    for y in range(H):
-        t = y / (H - 1)
-        grad.putpixel((0, y), tuple(round(a + (b - a) * t) for a, b in zip(top, bottom)))
-    img = grad.resize((W, H))
-    glow = Image.new("L", (W, H), 0)
-    ImageDraw.Draw(glow).ellipse((W - 520, -300, W + 380, 560), fill=70)
-    glow = glow.filter(ImageFilter.GaussianBlur(160))
-    img.paste(Image.new("RGB", (W, H), BRAND["accent"]), (0, 0), glow)
-    return img
+def _spaced(draw, xy, text, font, fill, spacing, anchor_right=False):
+    """Texto con espaciado entre letras (como CONSEJOS / ACTUALIDAD en los diseños)."""
+    widths = [_text_w(draw, ch, font) for ch in text]
+    total = sum(widths) + spacing * (len(text) - 1)
+    x, y = xy
+    if anchor_right:
+        x -= total
+    for ch, w in zip(text, widths):
+        draw.text((x, y), ch, font=font, fill=fill)
+        x += w + spacing
+    return total
 
 
-def _sun_gradient(size: tuple[int, int]) -> Image.Image:
-    a, b = _rgb(BRAND["sun_from"]), _rgb(BRAND["sun_to"])
-    grad = Image.new("RGB", (size[0], 1))
-    for x in range(size[0]):
-        t = x / max(1, size[0] - 1)
-        grad.putpixel((x, 0), tuple(round(p + (q - p) * t) for p, q in zip(a, b)))
-    return grad.resize(size)
-
-
-def render_post(imagen: dict, out_path: Path) -> Path:
-    """Dibuja la tarjeta del post con la identidad de wearesolareia.com.
-
-    imagen = {
-      "etiqueta": "Noticia · Gas",
-      "titular": "La TUR del gas podría subir un 54% el 1 de octubre",
-      "destacado": "54%",                    # opcional, se pinta en menta
-      "puntos": [{"titulo": "Precio", "texto": "de 4,12 a 6,95 cént/kWh"}],
-      "fuente": "OCU, sept. 2026",           # opcional
-      "cta": "¿Te afecta? Te lo revisamos gratis"
-    }
-    """
-    img = _background()
-    d = ImageDraw.Draw(img, "RGBA")
-    mint, white = BRAND["mint"], BRAND["text"]
-    content_w = W - 2 * MARGIN
-
-    # Cabecera: logo a la izquierda, etiqueta en píldora menta a la derecha
-    logo = Image.open(LOGO_PATH).convert("RGBA")
-    logo.thumbnail((330, 100), Image.LANCZOS)
-    img.paste(logo, (MARGIN, 64), logo)
-    tag = imagen.get("etiqueta", "").upper()
-    tag_f = _font(26, "display_semi")
-    tw = _text_w(d, tag, tag_f)
-    x1 = W - MARGIN
-    x0 = x1 - tw - 56
-    d.rounded_rectangle((x0, 78, x1, 136), radius=29, fill=mint)
-    d.text((x0 + 28, 107), tag, font=tag_f, fill=BRAND["ink"], anchor="lm")
-
-    # Titular: reduce el tamaño hasta que quepa
-    y = 250
-    for size in range(96, 50, -4):
+def _fit_headline(draw, titular, destacado, max_w, max_h, start=112, stop=56):
+    """Ajusta el titular. Si la parte destacada va al final, empieza en línea nueva (como en los diseños)."""
+    up, dest = titular.upper(), (destacado or "").upper()
+    split_end = bool(dest) and up.endswith(dest) and up != dest
+    for size in range(start, stop - 1, -4):
         f = _font(size, "display")
-        lines = _wrap_rich(d, _headline_runs(imagen["titular"], imagen.get("destacado"), f), content_w)
-        lh = int(size * 1.1)
-        if len(lines) * lh <= 420:
+        if split_end:
+            head = up[: -len(dest)].rstrip()
+            lines = _wrap_rich(draw, [(head, f, BRAND["text"])], max_w) + _wrap_rich(
+                draw, [(dest, f, BRAND["mint"])], max_w)
+        else:
+            lines = _wrap_rich(draw, _headline_runs(titular, destacado, f), max_w)
+        lh = int(size * 1.02)
+        if len(lines) * lh <= max_h and all(_line_w(draw, ln) <= max_w for ln in lines):
+            return lines, lh
+    return lines, lh
+
+
+def _arrow(draw, x, y, color, length=34):
+    draw.line((x, y, x + length, y), fill=color, width=4)
+    draw.line((x + length - 13, y - 12, x + length, y), fill=color, width=4)
+    draw.line((x + length - 13, y + 12, x + length, y), fill=color, width=4)
+
+
+def _mark(size: int, opacity: int) -> Image.Image:
+    """Isotipo (hoja + enchufe) en menta con la opacidad indicada, como ilustración."""
+    mark = Image.open(MARK_PATH).convert("RGBA")
+    alpha = mark.getchannel("A").point(lambda a: a * opacity // 255)
+    tinted = Image.new("RGBA", mark.size, BRAND["mint"])
+    tinted.putalpha(alpha)
+    tinted.thumbnail((size, size), Image.LANCZOS)
+    return tinted
+
+
+def _base(seccion: str, pagina: tuple[int, int] | None, pie: str | None):
+    img = Image.new("RGB", (W, H), BRAND["bg"])
+    d = ImageDraw.Draw(img, "RGBA")
+    logo = Image.open(LOGO_PATH).convert("RGBA")
+    logo.thumbnail((400, 124), Image.LANCZOS)
+    img.paste(logo, (MARGIN - 6, 70), logo)
+    mint = BRAND["mint"]
+    f = _font(30, "display_semi")
+    label = seccion.upper()
+    w = _spaced(d, (W - MARGIN, 112), label, f, mint, 7, anchor_right=True)
+    d.line((W - MARGIN - w - 20, 92, W - MARGIN, 92), fill=mint, width=3)
+    d.line((W - MARGIN - w - 20, 164, W - MARGIN, 164), fill=mint, width=3)
+    foot_f = _font(30)
+    pie = pie or BRAND["email"]
+    arrow = pie.endswith("→")
+    pie = pie.rstrip("→ ").rstrip()
+    d.text((MARGIN, H - 72), pie, font=foot_f, fill=BRAND["text"], anchor="lm")
+    if arrow:
+        _arrow(d, MARGIN + _text_w(d, pie, foot_f) + 16, H - 72, BRAND["text"])
+    if pagina and pagina[1] > 1:
+        d.text((W - MARGIN, H - 72), f"{pagina[0]} / {pagina[1]}", font=_font(32, "body_bold"),
+               fill=BRAND["text"], anchor="rm")
+    return img, d
+
+
+def _slide_portada(s, img, d):
+    mark = _mark(400, 55)
+    img.paste(mark, (W - MARGIN - mark.width + 30, H - mark.height - 130), mark)
+    lines, lh = _fit_headline(d, s["titular"], s.get("destacado"), W - 2 * MARGIN, 560, start=136)
+    y = _draw_lines(d, lines, MARGIN, 280, lh) + 24
+    if s.get("subtitulo"):
+        sub = _wrap_rich(d, [(s["subtitulo"], _font(58, "display_semi"), BRAND["text"])], W - 2 * MARGIN)
+        y = _draw_lines(d, sub, MARGIN, y, 70) + 36
+    d.rounded_rectangle((MARGIN, y, MARGIN + 130, y + 6), radius=3, fill=BRAND["mint"])
+    y += 50
+    if s.get("texto"):
+        txt = _wrap_rich(d, [(s["texto"], _font(42), BRAND["text"])], W - 2 * MARGIN - 220)
+        y = _draw_lines(d, txt, MARGIN, y, 56)
+    if s.get("fuente"):
+        d.text((MARGIN, y + 20), s["fuente"], font=_font(36, "display_semi"), fill=BRAND["mint"])
+
+
+def _slide_lista(s, img, d):
+    lines, lh = _fit_headline(d, s["titular"], s.get("destacado"), W - 2 * MARGIN, 300, start=128)
+    y = _draw_lines(d, lines, MARGIN, 260, lh) + 50
+    items = s.get("items", [])[:4]
+    cta = s.get("cta")
+    bottom = H - 150 - (160 if cta else 0)
+    num_f = _font(170 if len(items) <= 2 else 120, "display")
+    col = MARGIN + (_text_w(d, "00", num_f) + 50)
+    text_w = W - MARGIN - col
+    for size in range(58, 30, -2):
+        tf, bf = _font(size, "display"), _font(int(size * 0.72))
+        blocks = [
+            (_wrap_rich(d, [(it.get("titulo", ""), tf, BRAND["text"])], text_w),
+             _wrap_rich(d, [(it.get("texto", ""), bf, BRAND["text_soft"])], text_w) if it.get("texto") else [])
+            for it in items
+        ]
+        tlh, blh = int(size * 1.15), int(size * 0.72 * 1.4)
+        heights = [max(len(t) * tlh + len(b) * blh + 10, num_f.size) for t, b in blocks]
+        if sum(heights) + 60 * (len(items) - 1) <= bottom - y:
             break
-    y = _draw_lines(d, lines, MARGIN, y, lh) + 28
-    d.rounded_rectangle((MARGIN, y, MARGIN + 120, y + 8), radius=4, fill=mint)
-    y += 56
+    y += max(0, (bottom - y - sum(heights) - 60 * (len(items) - 1)) / 2)
+    for i, (it, (t, b), h) in enumerate(zip(items, blocks, heights)):
+        if i:
+            d.line((MARGIN, y - 30, W - MARGIN - 60, y - 30), fill=(140, 255, 185, 110), width=2)
+        num = it.get("num") or f"{i + 1:02d}"
+        d.text((MARGIN - 6, y + h / 2), num, font=num_f, fill=BRAND["mint"], anchor="lm")
+        d.line((col - 28, y, col - 28, y + h), fill=(140, 255, 185, 140), width=2)
+        ty = y + (h - (len(t) * tlh + len(b) * blh + 10)) / 2
+        ty = _draw_lines(d, t, col, ty, tlh) + 10
+        _draw_lines(d, b, col, ty, blh)
+        y += h + 60
+    if cta:
+        top = H - 250
+        d.rounded_rectangle((MARGIN, top, W - MARGIN, top + 100), radius=18, fill=BRAND["mint"])
+        f = _font(40, "display_semi")
+        tw = _text_w(d, cta, f)
+        x = (W - tw - 80) / 2
+        # icono marcador (guardar)
+        bx, by = x, top + 30
+        d.polygon([(bx, by), (bx + 30, by), (bx + 30, by + 42), (bx + 15, by + 30), (bx, by + 42)],
+                  outline=BRAND["ink"], width=4)
+        d.line((x + 58, top + 25, x + 58, top + 75), fill=BRAND["ink"], width=2)
+        d.text((x + 80, top + 50), cta, font=f, fill=BRAND["ink"], anchor="lm")
 
-    # Puntos clave en tarjetas translúcidas
-    puntos = imagen.get("puntos", [])[:5]
-    fuente = imagen.get("fuente")
-    cta_top = H - 190
-    bottom_limit = cta_top - (70 if fuente else 40)
-    pad = 26
-    for size in range(34, 22, -2):
-        fb, fr = _font(size, "body_bold"), _font(size, "body")
-        lh = int(size * 1.3)
-        blocks = []
-        for p in puntos:
-            runs = []
-            if p.get("titulo"):
-                t = p["titulo"].strip().rstrip(":.")
-                runs.append((t + ("." if t.isdigit() else ":"), fb, mint))
-            runs.append((p.get("texto", ""), fr, BRAND["text_soft"]))
-            blocks.append(_wrap_rich(d, runs, content_w - 2 * pad - 20))
-        gap = 18
-        total = sum(len(b) * lh + 2 * pad for b in blocks) + gap * max(0, len(blocks) - 1)
-        if y + total <= bottom_limit:
+
+def _slide_datos(s, img, d):
+    lines, lh = _fit_headline(d, s["titular"], s.get("destacado"), W - 2 * MARGIN, 260, start=104)
+    y = _draw_lines(d, lines, MARGIN, 250, lh) + 50
+    datos = s.get("datos", [])[:2]
+    col_w = (W - 2 * MARGIN) / max(1, len(datos))
+    for size in range(200, 90, -10):
+        vf = _font(size, "display")
+        if all(_text_w(d, x["valor"], vf) <= col_w - 50 for x in datos):
             break
-    for b in blocks:
-        h = len(b) * lh + 2 * pad
-        d.rounded_rectangle((MARGIN, y, W - MARGIN, y + h), radius=22, fill=(255, 255, 255, 16),
-                            outline=(140, 255, 185, 60), width=2)
-        d.rounded_rectangle((MARGIN + pad, y + pad + 4, MARGIN + pad + 6, y + h - pad - 4), radius=3, fill=mint)
-        _draw_lines(d, b, MARGIN + pad + 26, y + pad - 2, lh)
-        y += h + gap
+    lf = _font(48, "display")
+    for i, x in enumerate(datos):
+        cx = MARGIN + i * col_w + (40 if i else 0)
+        d.text((cx, y), x["valor"], font=vf, fill=BRAND["mint"])
+        d.text((cx, y + size * 1.02), x.get("etiqueta", ""), font=lf, fill=BRAND["text"])
+        if i:
+            d.line((MARGIN + i * col_w, y + 10, MARGIN + i * col_w, y + size + 70), fill=BRAND["mint"], width=3)
+    y += size + 150
+    if s.get("subtitulo"):
+        sub = _wrap_rich(d, [(s["subtitulo"], _font(54, "display"), BRAND["text"])], W - 2 * MARGIN)
+        y = _draw_lines(d, sub, MARGIN, y, 64) + 40
+    if s.get("texto"):
+        txt = _wrap_rich(d, [(s["texto"], _font(38), BRAND["text_soft"])], W - 2 * MARGIN)
+        _draw_lines(d, txt, MARGIN, y, 52)
 
-    if fuente:
-        d.text((MARGIN, cta_top - 52), f"Fuente: {fuente}", font=_font(24), fill=BRAND["text_muted"])
 
-    # Llamada a la acción con el degradado amarillo de la web
-    cta = imagen.get("cta") or "Te ayudamos a ahorrar en tu factura"
-    for cta_size in range(34, 20, -2):
-        cta_f = _font(cta_size, "display_semi")
-        if _text_w(d, cta, cta_f) + 90 <= content_w:
-            break
-    cw = min(_text_w(d, cta, cta_f) + 90, content_w)
-    ch = 84
-    cx0 = (W - cw) / 2
-    mask = Image.new("L", (int(cw), ch), 0)
-    ImageDraw.Draw(mask).rounded_rectangle((0, 0, int(cw) - 1, ch - 1), radius=ch // 2, fill=255)
-    img.paste(_sun_gradient((int(cw), ch)), (int(cx0), cta_top), mask)
-    d.text((W / 2, cta_top + ch / 2), cta, font=cta_f, fill=BRAND["ink"], anchor="mm")
-    contact = f"{BRAND['web']}  ·  {BRAND['instagram']}"
-    d.text((W / 2, H - 58), contact, font=_font(26), fill=BRAND["text_muted"], anchor="mm")
+LAYOUTS = {"portada": _slide_portada, "lista": _slide_lista, "datos": _slide_datos}
 
-    out_path.parent.mkdir(parents=True, exist_ok=True)
-    img.save(out_path, "JPEG", quality=92)
-    return out_path
+
+def render_carousel(post: dict, out_dir: Path) -> list[Path]:
+    """Genera las diapositivas del post (1080×1350 JPEG) al estilo de los diseños de Solareia.
+
+    post["seccion"] = "Consejos" | "Actualidad"
+    post["diapositivas"] = [
+      {"tipo": "portada", "titular": "¿Vas a cambiar de tarifa de luz?", "destacado": "de tarifa de luz?",
+       "subtitulo": "4 preguntas antes de contratar", "texto": "Compara con toda la información."},
+      {"tipo": "lista", "titular": "El precio y los extras", "destacado": "y los extras",
+       "items": [{"titulo": "¿Cuándo puede cambiar el precio?", "texto": "Revisa cómo se actualiza."}],
+       "cta": "Guárdalo para tu próxima renovación"},
+      {"tipo": "datos", "titular": "...", "datos": [{"valor": "23 %", "etiqueta": "Actualmente"}],
+       "subtitulo": "...", "texto": "...", "fuente": "AIE · 22/09/2026"}
+    ]
+    """
+    slides = post["diapositivas"]
+    n = len(slides)
+    out_dir.mkdir(parents=True, exist_ok=True)
+    paths = []
+    for i, s in enumerate(slides, 1):
+        if i == 1 and n > 1:
+            pie = s.get("pie") or "Desliza y guarda esta guía →"
+        else:
+            pie = s.get("pie") or (f"Fuente: {s['fuente']}" if s.get("fuente") and s["tipo"] != "portada" else None)
+        img, d = _base(post.get("seccion", "Consejos"), (i, n), pie)
+        LAYOUTS[s.get("tipo", "lista")](s, img, d)
+        path = out_dir / f"{post['id']}-{i}.jpg"
+        img.save(path, "JPEG", quality=92)
+        paths.append(path)
+    return paths
 
 
 def fit_to_feed(src: Path, out_path: Path) -> Path:
