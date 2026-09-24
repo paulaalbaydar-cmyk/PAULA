@@ -3,18 +3,31 @@
   "fecha": "2026-10-08",
   "tipo": "consejo",
   "categoria": "hogar",
-  "canva_design": "https://canva.link/nknmmopfrf12u9g",
-  "imagen_archivo": "2026-10-08-otono-hogar.jpg",
   "imagen": {
     "etiqueta": "Consejo · Hogar",
     "titular": "5 claves para que el otoño no dispare tu factura",
     "destacado": "5 claves",
     "puntos": [
-      {"titulo": "1", "texto": "Lavadora y lavavajillas en las horas más baratas"},
-      {"titulo": "2", "texto": "Calefacción a 19-21 °C: cada grado de más, ~7% más de consumo"},
-      {"titulo": "3", "texto": "Revisa tu potencia contratada"},
-      {"titulo": "4", "texto": "Compara tus tarifas de luz y gas antes del invierno"},
-      {"titulo": "5", "texto": "Autoconsumo solar: bonificaciones en IBI e ICIO"}
+      {
+        "titulo": "1",
+        "texto": "Lavadora y lavavajillas en las horas más baratas"
+      },
+      {
+        "titulo": "2",
+        "texto": "Calefacción a 19-21 °C: cada grado de más, ~7% más de consumo"
+      },
+      {
+        "titulo": "3",
+        "texto": "Revisa tu potencia contratada"
+      },
+      {
+        "titulo": "4",
+        "texto": "Compara tus tarifas de luz y gas antes del invierno"
+      },
+      {
+        "titulo": "5",
+        "texto": "Autoconsumo solar: bonificaciones en IBI e ICIO"
+      }
     ],
     "cta": "Te ayudamos a ahorrar"
   },

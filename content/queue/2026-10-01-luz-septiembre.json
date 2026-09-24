@@ -3,16 +3,23 @@
   "fecha": "2026-10-01",
   "tipo": "noticia",
   "categoria": "luz",
-  "canva_design": "https://canva.link/6y4hrxtocvlp6aw",
-  "imagen_archivo": "2026-10-01-luz-septiembre.jpg",
   "imagen": {
     "etiqueta": "Noticia · Luz",
     "titular": "La luz baja un 19% en septiembre… pero es el septiembre más caro en 4 años",
     "destacado": "19%",
     "puntos": [
-      {"titulo": "Factura media PVPC", "texto": "53,55 € (45,78 € en 2025)"},
-      {"titulo": "Precio medio", "texto": "189 €/MWh"},
-      {"titulo": "Impuestos", "texto": "IVA 21% + impuesto eléctrico 5,11% desde junio"}
+      {
+        "titulo": "Factura media PVPC",
+        "texto": "53,55 € (45,78 € en 2025)"
+      },
+      {
+        "titulo": "Precio medio",
+        "texto": "189 €/MWh"
+      },
+      {
+        "titulo": "Impuestos",
+        "texto": "IVA 21% + impuesto eléctrico 5,11% desde junio"
+      }
     ],
     "fuente": "Energy News / Que.es, sept. 2026",
     "cta": "Revisamos tu factura sin compromiso"

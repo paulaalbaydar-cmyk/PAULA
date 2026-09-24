@@ -9,18 +9,25 @@ QUEUE_DIR = ROOT / "content" / "queue"
 PUBLISHED_DIR = ROOT / "content" / "published"
 ASSETS_DIR = ROOT / "assets"
 FONTS_DIR = ASSETS_DIR / "fonts"
-LOGO_PATH = ASSETS_DIR / "logo.png"  # opcional: si existe se usa en el pie de la imagen
+LOGO_PATH = ASSETS_DIR / "logo.png"  # logo completo para fondo oscuro (menta + blanco)
 
-# Colores sacados del Brand Kit "SOLAREIA" de Canva
+# Identidad de wearesolareia.com / tarifasluzbaratas.com (variables --sl-* de estilo-solareia.css)
 BRAND = {
     "name": "SOLAREIA",
-    "tagline": "Consultoría energética independiente",
-    "navy": "#143254",
-    "gold": "#D1952C",
-    "cream": "#FBF6EC",
-    "line": "#E8DCC4",
-    "white": "#FFFFFF",
+    "tagline": "Energy consulting",
+    "bg_top": "#001516",
+    "bg_bottom": "#014044",
+    "brand_2": "#025A5F",
+    "mint": "#8CFFB9",
+    "accent": "#60C495",
+    "text": "#FFFFFF",
+    "text_soft": "#D9E1E2",
+    "text_muted": "#A3B6B2",
+    "sun_from": "#FFAA00",
+    "sun_to": "#E8F31A",
+    "ink": "#001516",
     "web": os.getenv("SOLAREIA_WEB", "wearesolareia.com"),
+    "instagram": "@solareiaconsulting",
 }
 
 # Tamaño de imagen: 4:5 vertical, válido para Instagram, Facebook y LinkedIn

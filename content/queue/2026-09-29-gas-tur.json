@@ -3,15 +3,19 @@
   "fecha": "2026-09-29",
   "tipo": "noticia",
   "categoria": "gas",
-  "canva_design": "https://canva.link/kd40s0y2ttyt914",
-  "imagen_archivo": "2026-09-29-gas-tur.jpg",
   "imagen": {
     "etiqueta": "Noticia · Gas",
     "titular": "La tarifa regulada del gas (TUR) podría subir un 54% el 1 de octubre",
     "destacado": "54%",
     "puntos": [
-      {"titulo": "Precio de la energía", "texto": "de 4,12 a ~6,95 cént/kWh (TUR.2)"},
-      {"titulo": "Hogar medio con calefacción", "texto": "de ~600 € a más de 900 €/año"}
+      {
+        "titulo": "Precio de la energía",
+        "texto": "de 4,12 a ~6,95 cént/kWh (TUR.2)"
+      },
+      {
+        "titulo": "Hogar medio con calefacción",
+        "texto": "de ~600 € a más de 900 €/año"
+      }
     ],
     "fuente": "OCU, septiembre 2026",
     "cta": "¿Te afecta? Te lo revisamos gratis"

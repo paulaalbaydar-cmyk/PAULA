@@ -3,17 +3,27 @@
   "fecha": "2026-10-06",
   "tipo": "consejo",
   "categoria": "empresas",
-  "canva_design": "https://canva.link/wrdv9e7os7xvvha",
-  "imagen_archivo": "2026-10-06-potencia-empresas.jpg",
   "imagen": {
     "etiqueta": "Consejo · Empresas",
     "titular": "¿Tu empresa paga potencia que no usa?",
     "destacado": "potencia que no usa",
     "puntos": [
-      {"titulo": "6 potencias", "texto": "en 3.0TD y 6.1TD pagas una por periodo, las uses o no"},
-      {"titulo": "P1 vs P6", "texto": "la potencia en P1 cuesta hasta 14 veces más que en P6"},
-      {"titulo": "Ajuste por periodos", "texto": "ahorro típico del 10-15% en el término de potencia"},
-      {"titulo": "Excesos", "texto": "se penalizan cada 15 minutos: vigílalos"}
+      {
+        "titulo": "6 potencias",
+        "texto": "en 3.0TD y 6.1TD pagas una por periodo, las uses o no"
+      },
+      {
+        "titulo": "P1 vs P6",
+        "texto": "la potencia en P1 cuesta hasta 14 veces más que en P6"
+      },
+      {
+        "titulo": "Ajuste por periodos",
+        "texto": "ahorro típico del 10-15% en el término de potencia"
+      },
+      {
+        "titulo": "Excesos",
+        "texto": "se penalizan cada 15 minutos: vigílalos"
+      }
     ],
     "cta": "Estudio de potencias gratuito"
   },

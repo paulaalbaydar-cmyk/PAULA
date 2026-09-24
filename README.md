@@ -31,25 +31,23 @@ Martes/jueves ─► "Publicar en redes": coge el post que toca de la cola, prep
 
 ### Imágenes
 
-1. **Diseño propio (Canva)**: si en `content/queue/` hay una imagen con el nombre indicado en
-   `imagen_archivo`, se usa esa. Las de 3:4 que exporta Canva se ajustan automáticamente a 4:5, el formato
-   máximo que admite Instagram.
-2. **Plantilla automática**: si no hay imagen, se genera una con los colores del Brand Kit de Solareia
-   (azul `#143254`, dorado `#D1952C`, fondo crema). Si subes el logo como `assets/logo.png` (PNG con
-   fondo transparente, en blanco o dorado), se pondrá en el pie.
+Cada post lleva una imagen 1080×1350 generada con la identidad de wearesolareia.com y
+tarifasluzbaratas.com: fondo petróleo (`#001516` → `#014044`), acento menta `#8CFFB9`, llamada
+a la acción con el degradado amarillo `#FFAA00` → `#E8F31A`, tipografías **Outfit** (titulares) y
+**Roboto** (texto) y el logo oficial (`assets/logo.png`, el mismo que usa el Área de Clientes).
+
+Si para un post concreto prefieres un diseño hecho a mano (por ejemplo en Canva), súbelo a
+`content/queue/` y añade al JSON del post `"imagen_archivo": "nombre-del-archivo.jpg"`. Se ajusta
+solo al formato 4:5 que exige Instagram.
 
 ## Primeros posts ya preparados
 
-| Fecha | Post | Diseño en Canva |
-|---|---|---|
-| Mar 29/09 | Noticia · Gas: la TUR podría subir un 54% el 1 de octubre | https://canva.link/kd40s0y2ttyt914 |
-| Jue 01/10 | Noticia · Luz: baja un 19% en septiembre, pero es el septiembre más caro en 4 años | https://canva.link/6y4hrxtocvlp6aw |
-| Mar 06/10 | Consejo · Empresas: ¿pagas potencia que no usas? | https://canva.link/wrdv9e7os7xvvha |
-| Jue 08/10 | Consejo · Hogar: 5 claves para que el otoño no dispare tu factura | https://canva.link/nknmmopfrf12u9g |
-
-Para usar los diseños de Canva, descarga cada uno como **JPG** y súbelo a `content/queue/` con el nombre de
-la columna `imagen_archivo` del JSON (por ejemplo `2026-09-29-gas-tur.jpg`). Si no los subes, se usará la
-plantilla automática.
+| Fecha | Post |
+|---|---|
+| Mar 29/09 | Noticia · Gas: la TUR podría subir un 54% el 1 de octubre |
+| Jue 01/10 | Noticia · Luz: baja un 19% en septiembre, pero es el septiembre más caro en 4 años |
+| Mar 06/10 | Consejo · Empresas: ¿pagas potencia que no usas? |
+| Jue 08/10 | Consejo · Hogar: 5 claves para que el otoño no dispare tu factura |
 
 ## Puesta en marcha (una sola vez)
 
