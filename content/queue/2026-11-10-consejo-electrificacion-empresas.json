@@ -1,0 +1,67 @@
+{
+  "id": "2026-11-10-consejo-electrificacion-empresas",
+  "fecha": "2026-11-10",
+  "tipo": "consejo",
+  "categoria": "empresas",
+  "seccion": "Consejos",
+  "titulo": "¿Tu negocio va a consumir más electricidad? Te acompañamos",
+  "diapositivas": [
+    {
+      "tipo": "portada",
+      "titular": "¿Tu negocio va a consumir más electricidad?",
+      "destacado": "más electricidad?",
+      "subtitulo": "Aerotermia, cargadores, nuevos equipos…",
+      "texto": "Te ayudamos a prepararlo bien.",
+      "fuente": "Contexto: análisis de la AIE · 22/09/2026"
+    },
+    {
+      "tipo": "datos",
+      "titular": "El potencial de electrificar",
+      "destacado": "de electrificar",
+      "datos": [
+        {
+          "valor": "23 %",
+          "etiqueta": "Actualmente"
+        },
+        {
+          "valor": "33 %",
+          "etiqueta": "Potencial en 2035"
+        }
+      ],
+      "subtitulo": "Del consumo final mundial de energía",
+      "texto": "Potencial económicamente competitivo estimado por la AIE, bajo los supuestos de su informe. No es un resultado garantizado.",
+      "fuente": "AIE · 22/09/2026"
+    },
+    {
+      "tipo": "lista",
+      "titular": "Te acompañamos",
+      "destacado": "acompañamos",
+      "items": [
+        {
+          "num": "01",
+          "titulo": "Estudiamos tu consumo",
+          "texto": "Cuánto cambiará y en qué horarios."
+        },
+        {
+          "num": "02",
+          "titulo": "Revisamos potencia e instalación",
+          "texto": "Lo que necesita tu proyecto."
+        },
+        {
+          "num": "03",
+          "titulo": "Gestionamos tarifa y trámites",
+          "texto": "Para que funcione desde el primer día."
+        }
+      ],
+      "cta": "Cuéntanos tu proyecto"
+    }
+  ],
+  "textos": {
+    "linkedin": "⚡ La electrificación ya no es una tendencia lejana: es una decisión que muchas empresas están tomando ahora.\n\nLa Agencia Internacional de la Energía publicó el 22 de septiembre un análisis según el cual, con tecnologías ya disponibles, la electricidad podría cubrir de forma económicamente competitiva el 33 % del consumo final mundial de energía en 2035, frente al 23 % actual (bajo los supuestos del informe).\n\nEn la práctica lo vemos cada semana: aerotermia, flotas eléctricas y puntos de recarga, hornos y procesos que pasan de gas a electricidad. Y en casi todos los casos aparece la misma pregunta tarde: ¿está preparado el suministro?\n\nPotencia, instalación, tarifa, horarios de uso y coste total de funcionamiento deben estudiarse antes de invertir, no después. En Solareia acompañamos a las empresas en ese proceso: estudiamos el nuevo consumo, dimensionamos la potencia, gestionamos tarifa y trámites y hacemos el seguimiento.\n\n¿Qué está frenando más la electrificación en vuestro sector: la inversión, la infraestructura o la incertidumbre sobre los costes?\n\n👉 Si estáis valorando un proyecto así, hablemos.\n\nFuente: AIE, 22/09/2026 · https://www.iea.org/news/electrification-takes-centre-stage-as-hormuz-shock-spurs-countries-to-seek-to-enhance-energy-security\n\n📩 info@wearesolareia.com · 📞 627 60 51 78\n\n#Solareia #Electrificación #EficienciaEnergética #Empresas",
+    "facebook": "⚡ ¿Vas a poner aerotermia, un cargador para el coche o nuevos equipos en tu negocio?\n\nTu consumo de electricidad va a cambiar, y conviene prepararlo antes: la potencia que necesitas, la instalación y la tarifa que mejor encaja con ese nuevo consumo.\n\nNo tienes que resolverlo solo. Cuéntanos tu proyecto y nos encargamos de estudiarlo y de gestionar todo lo necesario para que funcione desde el primer día 💚\n\n💬 ¿Qué cambio estás pensando hacer?\n\nFuente del dato: AIE, 22/09/2026.\n\n📩 info@wearesolareia.com · 📞 627 60 51 78\n\n#Solareia #EficienciaEnergética #Negocios",
+    "instagram": "⚡ ¿Vas a instalar aerotermia, cargadores o nuevos equipos?\n\nTu consumo eléctrico va a cambiar. Potencia, instalación, tarifa… hay mucho que preparar.\n\nNosotros nos encargamos: estudiamos tu consumo, revisamos lo que necesita tu proyecto y gestionamos tarifa y trámites 💚\n\nCuéntanos tu proyecto por mensaje directo.\n\nFuente del dato: AIE · 22/09/2026\n\n📩 info@wearesolareia.com · 📞 627 60 51 78\n\n#Solareia #EficienciaEnergética #Aerotermia #Negocios"
+  },
+  "fuentes": [
+    "https://www.iea.org/news/electrification-takes-centre-stage-as-hormuz-shock-spurs-countries-to-seek-to-enhance-energy-security"
+  ]
+}

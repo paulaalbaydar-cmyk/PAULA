@@ -1,0 +1,134 @@
+{
+  "id": "2026-10-06-servicio-pack-360",
+  "fecha": "2026-10-06",
+  "tipo": "servicio",
+  "categoria": "gestion",
+  "seccion": "Servicios",
+  "titulo": "Pack 360: nos ocupamos de toda tu energía",
+  "diapositivas": [
+    {
+      "tipo": "portada",
+      "titular": "¿Cansado de pelearte con tus facturas de energía?",
+      "destacado": "facturas de energía?",
+      "subtitulo": "Pack 360 Solareia",
+      "texto": "Nos ocupamos de tu energía para que tú te ocupes de lo importante."
+    },
+    {
+      "tipo": "lista",
+      "titular": "Qué incluye",
+      "destacado": "incluye",
+      "items": [
+        {
+          "num": "01",
+          "titulo": "Auditoría energética",
+          "texto": "Analizamos tus suministros y tu consumo."
+        },
+        {
+          "num": "02",
+          "titulo": "Soluciones personalizadas",
+          "texto": "Tarifas y potencias a tu medida."
+        },
+        {
+          "num": "03",
+          "titulo": "Gestión integral",
+          "texto": "Cambios, altas, titularidades e incidencias."
+        },
+        {
+          "num": "04",
+          "titulo": "Seguimiento continuo",
+          "texto": "Revisamos y te avisamos de las renovaciones."
+        }
+      ]
+    },
+    {
+      "tipo": "lista",
+      "titular": "Tú solo haces una cosa",
+      "destacado": "una cosa",
+      "items": [
+        {
+          "num": "01",
+          "titulo": "Nos envías tu última factura",
+          "texto": "Por email o WhatsApp."
+        },
+        {
+          "num": "02",
+          "titulo": "Te presentamos la propuesta",
+          "texto": "Clara y sin letra pequeña."
+        },
+        {
+          "num": "03",
+          "titulo": "Nosotros lo gestionamos todo",
+          "texto": "Y seguimos a tu lado."
+        }
+      ],
+      "cta": "Envíanos tu factura"
+    }
+  ],
+  "diapositivas_linkedin": [
+    {
+      "tipo": "portada",
+      "titular": "¿Quién gestiona la energía de tu empresa?",
+      "destacado": "de tu empresa?",
+      "subtitulo": "Pack 360 Solareia",
+      "texto": "Un único interlocutor para todos tus suministros."
+    },
+    {
+      "tipo": "lista",
+      "titular": "Qué incluye",
+      "destacado": "incluye",
+      "items": [
+        {
+          "num": "01",
+          "titulo": "Auditoría energética",
+          "texto": "De todos los suministros de la empresa."
+        },
+        {
+          "num": "02",
+          "titulo": "Soluciones personalizadas",
+          "texto": "Tarifas, potencias y renovables."
+        },
+        {
+          "num": "03",
+          "titulo": "Gestión integral",
+          "texto": "Contratos, altas, cambios e incidencias."
+        },
+        {
+          "num": "04",
+          "titulo": "Seguimiento continuo",
+          "texto": "Control de renovaciones y facturas."
+        }
+      ]
+    },
+    {
+      "tipo": "lista",
+      "titular": "Beneficios para tu negocio",
+      "destacado": "tu negocio",
+      "items": [
+        {
+          "num": "01",
+          "titulo": "Menos carga administrativa",
+          "texto": "Tu equipo se olvida de los trámites."
+        },
+        {
+          "num": "02",
+          "titulo": "Un solo interlocutor",
+          "texto": "Gestión centralizada y ágil."
+        },
+        {
+          "num": "03",
+          "titulo": "Mejores decisiones",
+          "texto": "Con datos claros de consumo y costes."
+        }
+      ],
+      "cta": "Solicita una reunión"
+    }
+  ],
+  "textos": {
+    "linkedin": "⚡ En muchas empresas, la energía la gestiona \"quien puede\": facturas de varias comercializadoras, contratos que se renuevan solos, incidencias con la distribuidora y nadie con tiempo para revisarlo.\n\nPara eso creamos el Pack 360 Solareia, nuestro servicio integral de gestión energética para empresas:\n\n🔹 Auditoría energética de todos los suministros.\n🔹 Soluciones personalizadas: tarifas, potencias y renovables.\n🔹 Gestión integral: cambios de comercializadora, altas, cambios de titularidad e incidencias.\n🔹 Seguimiento continuo de facturas y renovaciones.\n\nEl resultado: menos carga administrativa para tu equipo, un único interlocutor para toda la energía de la empresa y datos claros para tomar mejores decisiones. Y con total independencia: trabajamos con decenas de comercializadoras y respondemos solo ante nuestros clientes.\n\n¿Cuántas personas de tu empresa dedican tiempo hoy a facturas y contratos de energía?\n\n👉 Hablemos y te contamos cómo lo aplicaríamos en tu caso.\n\n📩 info@wearesolareia.com · 📞 627 60 51 78\n\n#Solareia #GestiónEnergética #Empresas #ConsultoríaEnergética",
+    "facebook": "⚡ Facturas que no se entienden, contratos que se renuevan solos, llamadas de comercializadoras… ¿te suena?\n\nCon el Pack 360 Solareia nos ocupamos de todo por ti:\n✅ Revisamos tus suministros y tu consumo.\n✅ Buscamos la tarifa y la potencia que mejor encajan contigo.\n✅ Gestionamos cambios, altas, titularidades e incidencias.\n✅ Y hacemos seguimiento para que no se te pase ninguna renovación.\n\nTú solo tienes que enviarnos tu última factura 💚\n\n💬 ¿Qué es lo que más te agobia de las facturas de energía?\n\n📩 info@wearesolareia.com · 📞 627 60 51 78\n\n#Solareia #AhorroEnergético #FacturaDeLaLuz",
+    "instagram": "⚡ ¿Cansado de pelearte con tus facturas de energía?\n\nPack 360 Solareia:\n✅ Auditoría energética\n✅ Soluciones personalizadas\n✅ Gestión integral de trámites\n✅ Seguimiento continuo\n\nTú solo nos envías tu factura. Del resto nos ocupamos nosotros 💚\n\nEscríbenos por mensaje directo.\n\n📩 info@wearesolareia.com · 📞 627 60 51 78\n\n#Solareia #AhorroEnergético #GestiónEnergética #FacturaDeLaLuz"
+  },
+  "fuentes": [
+    "Dossier de empresas de Solareia"
+  ]
+}

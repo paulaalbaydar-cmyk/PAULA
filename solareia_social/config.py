@@ -35,8 +35,9 @@ BRAND = {
 IMAGE_SIZE = (1080, 1350)
 
 # Calendario: día de la semana (0=lunes) -> tipo de publicación
-# Martes = consejo práctico, jueves = noticia del sector (si no hay novedad contrastada, otro consejo)
+# Martes = consejo o servicio (se alternan), jueves = noticia del sector (si no hay novedad contrastada, otro consejo)
 SCHEDULE = {1: "consejo", 3: "noticia"}
+TUESDAY_ROTATION = ["consejo", "servicio"]
 
 # Rotación de temas para que el contenido sea variado
 NEWS_TOPICS = [
@@ -56,6 +57,19 @@ TIP_TOPICS = [
     "autoconsumo solar: qué valorar antes de instalar",
 ]
 TIP_AUDIENCES = ["hogares", "pequeños negocios y empresas"]
+
+# Servicios de Solareia (fuente: dossier de empresas de Solareia en Canva)
+SERVICES = [
+    "Pack 360 Solareia: auditoría energética, soluciones personalizadas, gestión integral de todos los suministros "
+    "y seguimiento continuo, con un único interlocutor",
+    "instalación de placas solares y autoconsumo (estudio, instalación, trámites y compensación de excedentes)",
+    "puntos de recarga para vehículos eléctricos (viviendas, garajes comunitarios, empresas, hoteles y restaurantes)",
+    "optimización de tarifas y cambio de comercializadora (trabajamos con decenas de comercializadoras y "
+    "buscamos la mejor para cada cliente)",
+    "trámites de suministro sin complicaciones: cambios de titularidad, altas nuevas de luz y gas en inmuebles vacíos "
+    "o de nueva construcción y gestión de incidencias con distribuidoras y comercializadoras",
+    "eficiencia energética y certificados energéticos",
+]
 
 NETWORKS = ("linkedin", "facebook", "instagram")
 

@@ -1,0 +1,70 @@
+{
+  "id": "2026-10-13-consejo-potencia-empresas",
+  "fecha": "2026-10-13",
+  "tipo": "consejo",
+  "categoria": "empresas",
+  "seccion": "Consejos",
+  "titulo": "¿Tu empresa paga potencia que no usa? Te lo revisamos",
+  "diapositivas": [
+    {
+      "tipo": "portada",
+      "titular": "¿Tu empresa paga potencia que no usa?",
+      "destacado": "que no usa?",
+      "subtitulo": "Es un coste fijo que llega cada mes",
+      "texto": "Te lo revisamos con tus datos reales."
+    },
+    {
+      "tipo": "lista",
+      "titular": "Por qué pasa",
+      "destacado": "pasa",
+      "items": [
+        {
+          "num": "01",
+          "titulo": "Seis potencias, una por periodo",
+          "texto": "En 3.0TD y 6.1TD, se usen o no."
+        },
+        {
+          "num": "02",
+          "titulo": "Contratadas hace años",
+          "texto": "Y nunca revisadas tras cambios."
+        },
+        {
+          "num": "03",
+          "titulo": "Excesos que se penalizan",
+          "texto": "Y que nadie vigila."
+        }
+      ]
+    },
+    {
+      "tipo": "lista",
+      "titular": "Nosotros lo revisamos",
+      "destacado": "lo revisamos",
+      "items": [
+        {
+          "num": "01",
+          "titulo": "Obtenemos tu curva de carga",
+          "texto": "Solo necesitamos tu autorización."
+        },
+        {
+          "num": "02",
+          "titulo": "Calculamos la potencia adecuada",
+          "texto": "Periodo a periodo."
+        },
+        {
+          "num": "03",
+          "titulo": "Tramitamos el cambio",
+          "texto": "Con la distribuidora, sin que te ocupes."
+        }
+      ],
+      "cta": "Pide tu estudio de potencias"
+    }
+  ],
+  "textos": {
+    "linkedin": "⚡ La potencia contratada es uno de los costes de la factura eléctrica que menos se revisan en las empresas.\n\nEn las tarifas 3.0TD y 6.1TD se contratan seis potencias, una por periodo, y el término de potencia se paga cada mes se utilice o no. La de P1 es, además, la más cara.\n\nLo que encontramos con frecuencia:\n• Las seis potencias iguales, aunque el perfil de consumo no lo sea.\n• Potencias fijadas hace años y no revisadas tras cambiar maquinaria, horarios o instalar autoconsumo.\n• Excesos que se penalizan en cada factura y que nadie vigila.\n\nAjustarlo bien requiere analizar la curva de carga cuartohoraria y conocer las reglas de la distribuidora para los cambios. En Solareia lo hacemos por ti: obtenemos los datos, calculamos la potencia adecuada para cada periodo y tramitamos el cambio.\n\n¿Cuándo se revisaron por última vez las potencias de vuestros suministros?\n\n👉 Solicita el estudio de potencias de tu empresa.\n\n📩 info@wearesolareia.com · 📞 627 60 51 78\n\n#Solareia #Empresas #EficienciaEnergética #GestiónEnergética",
+    "facebook": "🏢 ¿Tienes un negocio? Puede que estés pagando potencia que no usas.\n\nEn las tarifas de empresa se pagan 6 potencias diferentes cada mes, se usen o no. Muchas se contrataron hace años y nunca se han vuelto a mirar.\n\nNo tienes que ponerte a estudiar curvas de carga 😅 Con tu autorización obtenemos tus datos de consumo, calculamos la potencia que de verdad necesitas y tramitamos el cambio con la distribuidora.\n\n💬 ¿Sabes qué potencia tiene contratada tu negocio?\n\n📩 info@wearesolareia.com · 📞 627 60 51 78\n\n#Solareia #Empresas #Hostelería #FacturaDeLaLuz",
+    "instagram": "🏢 ¿Tu negocio paga potencia que no usa?\n\n⚙️ En 3.0TD y 6.1TD pagas 6 potencias cada mes, se usen o no.\n📅 Muchas se contrataron hace años y nadie las ha revisado.\n⏱️ Y los excesos se penalizan.\n\nNosotros lo revisamos con tus datos reales y tramitamos el cambio 💚 Escríbenos por mensaje directo.\n\n📩 info@wearesolareia.com · 📞 627 60 51 78\n\n#Solareia #Empresas #Pymes #Hostelería #EficienciaEnergética"
+  },
+  "fuentes": [
+    "https://www.boe.es/buscar/doc.php?id=BOE-A-2020-1066"
+  ]
+}

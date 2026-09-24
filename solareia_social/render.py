@@ -171,10 +171,12 @@ def _slide_lista(s, img, d):
     items = s.get("items", [])[:4]
     cta = s.get("cta")
     bottom = H - 150 - (160 if cta else 0)
-    num_f = _font(170 if len(items) <= 2 else 120, "display")
+    gap = 60 if len(items) <= 2 else 36
+    per_item = (bottom - y - gap * (len(items) - 1)) / max(1, len(items))
+    num_f = _font(int(min(170 if len(items) <= 2 else 130, per_item * 0.9)), "display")
     col = MARGIN + (_text_w(d, "00", num_f) + 50)
     text_w = W - MARGIN - col
-    for size in range(58, 30, -2):
+    for size in range(58, 28, -2):
         tf, bf = _font(size, "display"), _font(int(size * 0.72))
         blocks = [
             (_wrap_rich(d, [(it.get("titulo", ""), tf, BRAND["text"])], text_w),
@@ -183,19 +185,19 @@ def _slide_lista(s, img, d):
         ]
         tlh, blh = int(size * 1.15), int(size * 0.72 * 1.4)
         heights = [max(len(t) * tlh + len(b) * blh + 10, num_f.size) for t, b in blocks]
-        if sum(heights) + 60 * (len(items) - 1) <= bottom - y:
+        if sum(heights) + gap * (len(items) - 1) <= bottom - y:
             break
-    y += max(0, (bottom - y - sum(heights) - 60 * (len(items) - 1)) / 2)
+    y += max(0, (bottom - y - sum(heights) - gap * (len(items) - 1)) / 2)
     for i, (it, (t, b), h) in enumerate(zip(items, blocks, heights)):
         if i:
-            d.line((MARGIN, y - 30, W - MARGIN - 60, y - 30), fill=(140, 255, 185, 110), width=2)
+            d.line((MARGIN, y - gap / 2, W - MARGIN - 60, y - gap / 2), fill=(140, 255, 185, 110), width=2)
         num = it.get("num") or f"{i + 1:02d}"
         d.text((MARGIN - 6, y + h / 2), num, font=num_f, fill=BRAND["mint"], anchor="lm")
         d.line((col - 28, y, col - 28, y + h), fill=(140, 255, 185, 140), width=2)
         ty = y + (h - (len(t) * tlh + len(b) * blh + 10)) / 2
         ty = _draw_lines(d, t, col, ty, tlh) + 10
         _draw_lines(d, b, col, ty, blh)
-        y += h + 60
+        y += h + gap
     if cta:
         top = H - 250
         d.rounded_rectangle((MARGIN, top, W - MARGIN, top + 100), radius=18, fill=BRAND["mint"])
@@ -238,7 +240,7 @@ def _slide_datos(s, img, d):
 LAYOUTS = {"portada": _slide_portada, "lista": _slide_lista, "datos": _slide_datos}
 
 
-def render_carousel(post: dict, out_dir: Path) -> list[Path]:
+def render_carousel(post: dict, out_dir: Path, key: str = "diapositivas", suffix: str = "") -> list[Path]:
     """Genera las diapositivas del post (1080×1350 JPEG) al estilo de los diseños de Solareia.
 
     post["seccion"] = "Consejos" | "Actualidad"
@@ -251,8 +253,10 @@ def render_carousel(post: dict, out_dir: Path) -> list[Path]:
       {"tipo": "datos", "titular": "...", "datos": [{"valor": "23 %", "etiqueta": "Actualmente"}],
        "subtitulo": "...", "texto": "...", "fuente": "AIE · 22/09/2026"}
     ]
+
+    Con key="diapositivas_linkedin" se genera el carrusel propio de LinkedIn (sufijo "-li").
     """
-    slides = post["diapositivas"]
+    slides = post[key]
     n = len(slides)
     out_dir.mkdir(parents=True, exist_ok=True)
     paths = []
@@ -263,7 +267,7 @@ def render_carousel(post: dict, out_dir: Path) -> list[Path]:
             pie = s.get("pie") or (f"Fuente: {s['fuente']}" if s.get("fuente") and s["tipo"] != "portada" else None)
         img, d = _base(post.get("seccion", "Consejos"), (i, n), pie)
         LAYOUTS[s.get("tipo", "lista")](s, img, d)
-        path = out_dir / f"{post['id']}-{i}.jpg"
+        path = out_dir / f"{post['id']}{suffix}-{i}.jpg"
         img.save(path, "JPEG", quality=92)
         paths.append(path)
     return paths

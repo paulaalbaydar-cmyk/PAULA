@@ -14,11 +14,11 @@ from datetime import date, datetime, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
-from .config import PUBLISHED_DIR, QUEUE_DIR, ROOT, SCHEDULE, enabled_networks
+from .config import PUBLISHED_DIR, QUEUE_DIR, ROOT, SCHEDULE, TUESDAY_ROTATION, enabled_networks
 from .render import fit_to_feed, render_carousel
 
 MADRID = ZoneInfo("Europe/Madrid")
-MAX_DELAY_DAYS = {"noticia": 3, "consejo": 30}  # una noticia retrasada más de 3 días ya no se publica
+MAX_DELAY_DAYS = {"noticia": 3, "consejo": 30, "servicio": 30}  # una noticia retrasada más de 3 días ya no se publica
 
 
 def today_madrid() -> date:
@@ -50,6 +50,19 @@ def rotation_for(tipo: str) -> int:
     return sum(1 for p in published() if p.get("tipo") == tipo)
 
 
+def slot_type(day: date) -> str | None:
+    """Tipo de post que toca ese día. Los martes alternan consejo y servicio según lo último publicado."""
+    tipo = SCHEDULE.get(day.weekday())
+    if tipo != "consejo":
+        return tipo
+    previous = [p.get("tipo") for p in published() if p.get("tipo") in TUESDAY_ROTATION and p.get("estado") == "publicado"]
+    previous += [_load(q).get("tipo") for q in queued() if _load(q)["fecha"] < day.isoformat()
+                 and _load(q).get("tipo") in TUESDAY_ROTATION]
+    if not previous:
+        return TUESDAY_ROTATION[0]
+    return TUESDAY_ROTATION[(TUESDAY_ROTATION.index(previous[-1]) + 1) % len(TUESDAY_ROTATION)]
+
+
 def is_brief(post: dict) -> bool:
     """Un 'brief' es un hueco reservado en la cola con solo el tema: se redacta el mismo día."""
     return not post.get("diapositivas")
@@ -66,15 +79,26 @@ def new_post(tipo: str, day: date, tema: str | None = None, post_id: str | None 
     return post
 
 
-def prepare_images(post: dict, out_dir: Path) -> list[Path]:
-    """Usa las imágenes propias del post (campo 'imagenes') si existen; si no, genera el carrusel."""
-    custom = [QUEUE_DIR / name for name in post.get("imagenes", [])]
-    if custom and all(p.exists() for p in custom):
-        return [fit_to_feed(src, out_dir / f"{post['id']}-{i}.jpg") for i, src in enumerate(custom, 1)]
-    return render_carousel(post, out_dir)
+def prepare_images(post: dict, out_dir: Path) -> dict[str, list[Path]]:
+    """Imágenes por red: 'default' (Instagram y Facebook) y 'linkedin'.
+
+    LinkedIn usa su propio carrusel si el post trae "diapositivas_linkedin" (o "imagenes_linkedin");
+    si no, comparte el de Instagram y Facebook. Las imágenes propias ("imagenes") tienen prioridad.
+    """
+    def build(img_key: str, slides_key: str, suffix: str) -> list[Path] | None:
+        custom = [QUEUE_DIR / name for name in post.get(img_key, [])]
+        if custom and all(p.exists() for p in custom):
+            return [fit_to_feed(src, out_dir / f"{post['id']}{suffix}-{i}.jpg") for i, src in enumerate(custom, 1)]
+        if post.get(slides_key):
+            return render_carousel(post, out_dir, slides_key, suffix)
+        return None
+
+    default = build("imagenes", "diapositivas", "")
+    linkedin = build("imagenes_linkedin", "diapositivas_linkedin", "-li") or default
+    return {"default": default, "linkedin": linkedin}
 
 
-def publish_post(post: dict, images: list[Path], dry_run: bool) -> bool:
+def publish_post(post: dict, image_sets: dict[str, list[Path]], dry_run: bool) -> bool:
     from . import publishers as pub
 
     results = post.setdefault("publicaciones", {})
@@ -85,6 +109,7 @@ def publish_post(post: dict, images: list[Path], dry_run: bool) -> bool:
             print(f"[{net}] ya publicado, se omite")
             continue
         text = post["textos"][net]
+        images = image_sets["linkedin" if net == "linkedin" else "default"]
         if dry_run:
             print(f"\n===== {net.upper()} (dry-run, {len(images)} imágenes) =====\n{text}\n")
             continue
@@ -128,9 +153,9 @@ def pick_from_queue(day: date, dry_run: bool):
 
 def cmd_publish(args) -> int:
     day = date.fromisoformat(args.date) if args.date else today_madrid()
-    tipo = SCHEDULE.get(day.weekday())
+    tipo = slot_type(day)
     if tipo is None and not args.force:
-        print(f"{day}: hoy no toca publicar (martes: consejo, jueves: noticia).")
+        print(f"{day}: hoy no toca publicar (martes: consejo o servicio, jueves: noticia).")
         return 0
     tipo = tipo or "consejo"
 
@@ -143,10 +168,12 @@ def cmd_publish(args) -> int:
         post = new_post(tipo, day)
 
     out_dir = (ROOT / "previews") if args.dry_run else PUBLISHED_DIR
-    images = prepare_images(post, out_dir)
-    print(f"Post: {post['id']} — {post.get('titulo')}\nImágenes: {', '.join(str(i) for i in images)}")
+    image_sets = prepare_images(post, out_dir)
+    for name, imgs in image_sets.items():
+        print(f"Imágenes ({name}): {', '.join(str(i) for i in imgs)}")
+    print(f"Post: {post['id']} — {post.get('titulo')}")
 
-    ok = publish_post(post, images, args.dry_run)
+    ok = publish_post(post, image_sets, args.dry_run)
     if args.dry_run:
         return 0
 
@@ -154,25 +181,26 @@ def cmd_publish(args) -> int:
         post["estado"] = "publicado"
         _save(post, PUBLISHED_DIR / f"{post['id']}.json")
         if queue_json:
-            for name in post.get("imagenes", []):
+            for name in post.get("imagenes", []) + post.get("imagenes_linkedin", []):
                 (QUEUE_DIR / name).unlink(missing_ok=True)
             queue_json.unlink()
         return 0
 
     # Fallo parcial: se guarda en la cola con el estado para reintentar solo las redes que fallaron
     post["estado"] = "pendiente de reintento"
-    post["imagenes"] = []
-    for img in images:
-        target = QUEUE_DIR / img.name
-        if img.resolve() != target.resolve():
-            shutil.move(img, target)
-        post["imagenes"].append(img.name)
+    for field, imgs in (("imagenes", image_sets["default"]), ("imagenes_linkedin", image_sets["linkedin"])):
+        post[field] = []
+        for img in imgs:
+            target = QUEUE_DIR / img.name
+            if img.exists() and img.resolve() != target.resolve():
+                shutil.move(img, target)
+            post[field].append(img.name)
     _save(post, queue_json or QUEUE_DIR / f"{post['id']}.json")
     return 1
 
 
 def cmd_generate(args) -> int:
-    """Prepara los consejos de los próximos 7 días que aún no tengan post en la cola.
+    """Prepara el consejo o servicio de los próximos 7 días si aún no tiene post en la cola.
 
     Las noticias no se preparan con antelación: se redactan el mismo jueves para que sean actuales.
     """
@@ -180,9 +208,10 @@ def cmd_generate(args) -> int:
     taken = {_load(p)["fecha"] for p in queued()}
     for offset in range(1, 8):
         day = start + timedelta(days=offset)
-        if SCHEDULE.get(day.weekday()) != "consejo" or day.isoformat() in taken:
+        tipo = slot_type(day)
+        if tipo not in TUESDAY_ROTATION or day.isoformat() in taken:
             continue
-        post = new_post("consejo", day)
+        post = new_post(tipo, day)
         _save(post, QUEUE_DIR / f"{post['id']}.json")
         print(f"Borrador creado: {post['id']} — {post.get('titulo')}")
     return 0
@@ -195,8 +224,9 @@ def cmd_preview(args) -> int:
         if is_brief(post):
             print(f"{path.name}: tema reservado, se redactará el {post['fecha']} ({post.get('tema')})")
             continue
-        for img in prepare_images(post, out_dir):
-            print(img)
+        for imgs in prepare_images(post, out_dir).values():
+            for img in dict.fromkeys(imgs):
+                print(img)
     return 0
 
 

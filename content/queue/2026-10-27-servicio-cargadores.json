@@ -1,0 +1,130 @@
+{
+  "id": "2026-10-27-servicio-cargadores",
+  "fecha": "2026-10-27",
+  "tipo": "servicio",
+  "categoria": "movilidad",
+  "seccion": "Servicios",
+  "titulo": "Puntos de recarga para coche eléctrico: nos encargamos de todo",
+  "diapositivas": [
+    {
+      "tipo": "portada",
+      "titular": "¿Tienes o vas a tener coche eléctrico?",
+      "destacado": "coche eléctrico?",
+      "subtitulo": "Tu punto de recarga, sin complicaciones",
+      "texto": "En tu casa o en tu garaje comunitario."
+    },
+    {
+      "tipo": "lista",
+      "titular": "Lo que hay que resolver",
+      "destacado": "resolver",
+      "items": [
+        {
+          "num": "01",
+          "titulo": "¿Tienes potencia suficiente?",
+          "texto": "Para cargar sin que salten los plomos."
+        },
+        {
+          "num": "02",
+          "titulo": "La instalación",
+          "texto": "Hasta tu plaza de garaje."
+        },
+        {
+          "num": "03",
+          "titulo": "En garaje comunitario",
+          "texto": "Basta con comunicarlo a la comunidad."
+        },
+        {
+          "num": "04",
+          "titulo": "La tarifa",
+          "texto": "Para cargar en las horas más baratas."
+        }
+      ]
+    },
+    {
+      "tipo": "lista",
+      "titular": "Nosotros lo hacemos",
+      "destacado": "lo hacemos",
+      "items": [
+        {
+          "num": "01",
+          "titulo": "Estudiamos tu caso",
+          "texto": "Potencia, instalación y consumo."
+        },
+        {
+          "num": "02",
+          "titulo": "Instalamos tu cargador",
+          "texto": "Con instaladores de confianza."
+        },
+        {
+          "num": "03",
+          "titulo": "Ajustamos tu tarifa",
+          "texto": "Y tramitamos lo necesario."
+        }
+      ],
+      "cta": "Pide presupuesto para tu cargador"
+    }
+  ],
+  "diapositivas_linkedin": [
+    {
+      "tipo": "portada",
+      "titular": "¿Tu empresa ofrece recarga para coches eléctricos?",
+      "destacado": "coches eléctricos?",
+      "subtitulo": "Flotas, empleados y clientes",
+      "texto": "Hoteles, restaurantes, comercios y oficinas."
+    },
+    {
+      "tipo": "lista",
+      "titular": "Por qué interesa",
+      "destacado": "interesa",
+      "items": [
+        {
+          "num": "01",
+          "titulo": "Flotas eléctricas",
+          "texto": "Carga propia y controlada."
+        },
+        {
+          "num": "02",
+          "titulo": "Un servicio para clientes",
+          "texto": "Que eligen dónde parar y alojarse."
+        },
+        {
+          "num": "03",
+          "titulo": "Un beneficio para empleados",
+          "texto": "Y una imagen más sostenible."
+        }
+      ]
+    },
+    {
+      "tipo": "lista",
+      "titular": "Proyecto completo",
+      "destacado": "completo",
+      "items": [
+        {
+          "num": "01",
+          "titulo": "Estudio de potencia",
+          "texto": "Sin sobrecostes en tu suministro."
+        },
+        {
+          "num": "02",
+          "titulo": "Instalación y legalización",
+          "texto": "Con instaladores de confianza."
+        },
+        {
+          "num": "03",
+          "titulo": "Tarifa y gestión",
+          "texto": "Adaptadas al nuevo consumo."
+        }
+      ],
+      "cta": "Solicita tu estudio de recarga"
+    }
+  ],
+  "textos": {
+    "linkedin": "🔌 Cada vez más clientes, empleados y flotas se mueven en vehículo eléctrico. Y cada vez más empresas se preguntan si deberían ofrecer puntos de recarga.\n\nPara un hotel, un restaurante o un comercio, la recarga puede ser un motivo para que el cliente elija dónde parar. Para una empresa con flota, una forma de controlar el coste de la movilidad. Y para cualquier organización, un beneficio para sus empleados.\n\nLa clave es plantearlo bien desde el suministro: potencia disponible, instalación, legalización, tarifa y gestión del nuevo consumo. En Solareia lo abordamos como un proyecto completo: estudiamos la potencia necesaria, instalamos y legalizamos los puntos de recarga con instaladores de confianza y adaptamos la tarifa al nuevo consumo.\n\n¿En vuestro sector ya se nota la demanda de puntos de recarga?\n\n👉 Solicita el estudio de recarga para tu empresa.\n\n📩 info@wearesolareia.com · 📞 627 60 51 78\n\n#Solareia #MovilidadEléctrica #PuntosDeRecarga #Empresas",
+    "facebook": "🔌 ¿Tienes o vas a tener coche eléctrico?\n\nPara cargarlo en casa hay que comprobar si tienes potencia suficiente, llevar la instalación hasta tu plaza y elegir una tarifa que te permita cargar en las horas más baratas. Y si tu plaza está en un garaje comunitario, tranquilo: basta con comunicarlo previamente a la comunidad.\n\nNosotros nos encargamos de todo: estudiamos tu caso, instalamos tu cargador y ajustamos tu tarifa 💚\n\n💬 ¿Te estás planteando pasarte al coche eléctrico?\n\n📩 info@wearesolareia.com · 📞 627 60 51 78\n\n#Solareia #CocheEléctrico #PuntoDeRecarga",
+    "instagram": "🔌 ¿Tienes o vas a tener coche eléctrico?\n\nPara cargar en casa hay que resolver:\n✅ Si tienes potencia suficiente\n✅ La instalación hasta tu plaza\n✅ Garaje comunitario: basta con comunicarlo\n✅ La tarifa para cargar barato\n\nNosotros lo hacemos todo 💚 Pide presupuesto por mensaje directo.\n\n📩 info@wearesolareia.com · 📞 627 60 51 78\n\n#Solareia #CocheEléctrico #PuntoDeRecarga #MovilidadEléctrica"
+  },
+  "fuentes": [
+    "Dossier de empresas de Solareia",
+    "https://www.boe.es/buscar/act.php?id=BOE-A-1960-10906 (Ley de Propiedad Horizontal, art. 17.5)"
+  ]
+}

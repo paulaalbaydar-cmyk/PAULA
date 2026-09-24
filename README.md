@@ -6,22 +6,26 @@ Publica **2 veces por semana** (martes y jueves) en:
 - **Facebook**: página de Solareia
 - **Instagram**: @solareiaconsulting
 
-Calendario editorial (según la propuesta preparada con ChatGPT):
+Calendario editorial:
 
 | Día | Tipo | Contenido |
 |---|---|---|
-| Martes | **Consejo** | Acción concreta y cuándo aplica: ofertas y renovaciones, lectura de facturas, horarios de consumo, potencia, autoconsumo… alternando hogares y pequeños negocios/empresas |
-| Jueves | **Actualidad** | Novedad de luz, gas, impuestos o renovables de los últimos días, con la fuente original. Si no hay una novedad relevante y contrastada, se publica otro consejo |
+| Martes | **Consejo** o **Servicio** (se alternan) | Consejo: plantea un problema o duda (tarifas, renovaciones, potencia, horarios…) y muestra cómo Solareia se encarga de ello. Servicio: Pack 360, placas solares y autoconsumo, puntos de recarga, cambios de comercializadora, trámites, eficiencia… |
+| Jueves | **Actualidad** | Novedad de luz, gas, impuestos o renovables de esa semana, con la fuente original. Si no hay una novedad contrastada, se publica un consejo |
 
 Cada publicación es un **carrusel de 3 imágenes** y lleva un texto adaptado a cada red:
 
-- **LinkedIn**: enfoque profesional y decisiones para empresas; termina con una pregunta para abrir conversación.
+- **LinkedIn**: público de empresarios y profesionales del sector. Actualidad con la lectura de Solareia y
+  captación de clientes de empresa. Cuando el carrusel de Instagram/Facebook va para hogares, LinkedIn lleva
+  su propio carrusel para empresas (`diapositivas_linkedin`).
 - **Instagram**: ejemplos cotidianos, texto breve e invitación a guardar el carrusel.
 - **Facebook**: texto cercano y explicativo para hogares y pequeños negocios, con una pregunta.
 
-Reglas que sigue la IA al redactar: comprobar la fuente y la fecha de cada noticia, distinguir previsiones de
-resultados, no inventar cifras, **no prometer porcentajes de ahorro sin un estudio**, no mencionar comercializadoras
-y cerrar siempre con `📩 info@wearesolareia.com`.
+Reglas que sigue la IA al redactar: en los consejos y servicios, **Solareia hace el trabajo por el cliente**
+("te lo revisamos", "nos encargamos") y cada carrusel acaba con cómo le ayudamos y una llamada a contactar;
+comprobar la fuente y la fecha de cada noticia, distinguir previsiones de resultados, no inventar cifras ni
+prometer ahorros sin estudio, no decir que el servicio es gratuito, no mencionar comercializadoras y cerrar con
+`📩 info@wearesolareia.com · 📞 627 60 51 78`.
 
 ## Cómo funciona
 
@@ -52,16 +56,24 @@ Si para un post prefieres tus propias imágenes (por ejemplo, las que te hizo Ch
 súbelas a `content/queue/` y añade al JSON del post `"imagenes": ["foto-1.jpg", "foto-2.jpg", "foto-3.jpg"]`.
 Se ajustan solas al formato 4:5 que exige Instagram.
 
-## Posts ya preparados
+## Contenido preparado (29/09 – 29/10, más dos extra)
 
 | Fecha | Tipo | Post |
 |---|---|---|
-| Mar 29/09 | Consejo | ¿Vas a cambiar de tarifa de luz? 4 preguntas antes de contratar (el de ChatGPT) |
-| Jue 01/10 | Actualidad | Tema reservado: revisión de la TUR del gas del 1 de octubre, con el precio oficial de ese día |
-| Mar 06/10 | Consejo | ¿Te ayuda cambiar tus horarios de consumo? |
-| Jue 08/10 | Actualidad | Se elige ese mismo día |
-| Mar 13/10 | Consejo | ¿Tu negocio va a consumir más electricidad? (basado en el análisis de la AIE de ChatGPT) |
-| Mar 20/10 | Consejo | ¿Tu empresa paga potencia que no usa? |
+| Mar 29/09 | Consejo | ¿Te han ofrecido una nueva tarifa de luz? Te la revisamos |
+| Jue 01/10 | Actualidad | Revisión de la TUR del gas (se redacta ese día con el precio oficial) |
+| Mar 06/10 | Servicio | Pack 360: nos ocupamos de toda tu energía |
+| Jue 08/10 | Actualidad | Balance del precio de la luz de septiembre y previsión |
+| Mar 13/10 | Consejo | ¿Tu empresa paga potencia que no usa? Te lo revisamos |
+| Jue 15/10 | Actualidad | Renovables y autoconsumo |
+| Mar 20/10 | Servicio | Placas solares: del estudio a los trámites |
+| Jue 22/10 | Actualidad | Regulación y costes (peajes, impuestos, CNMC, BOE) |
+| Mar 27/10 | Servicio | Puntos de recarga para coche eléctrico |
+| Jue 29/10 | Actualidad | Novedad internacional y efecto en España este invierno |
+| Mar 03/11 | Consejo | ¿Te compensa poner la lavadora de noche? |
+| Mar 10/11 | Consejo | ¿Tu negocio va a consumir más electricidad? |
+
+Los jueves son temas reservados: la noticia se redacta ese mismo día para que sea actual.
 
 ## Puesta en marcha (una sola vez)
 

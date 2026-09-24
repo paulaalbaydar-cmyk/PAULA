@@ -1,0 +1,130 @@
+{
+  "id": "2026-10-20-servicio-placas-solares",
+  "fecha": "2026-10-20",
+  "tipo": "servicio",
+  "categoria": "autoconsumo",
+  "seccion": "Servicios",
+  "titulo": "Placas solares: te lo hacemos todo, del estudio a los trámites",
+  "diapositivas": [
+    {
+      "tipo": "portada",
+      "titular": "¿Piensas en poner placas solares?",
+      "destacado": "placas solares?",
+      "subtitulo": "Del estudio a los trámites, lo hacemos todo",
+      "texto": "En tu casa o en tu negocio."
+    },
+    {
+      "tipo": "lista",
+      "titular": "Lo que hay detrás",
+      "destacado": "detrás",
+      "items": [
+        {
+          "num": "01",
+          "titulo": "¿Cuántos paneles necesitas?",
+          "texto": "Depende de tu consumo real."
+        },
+        {
+          "num": "02",
+          "titulo": "Permisos y legalización",
+          "texto": "Ayuntamiento, distribuidora y registro."
+        },
+        {
+          "num": "03",
+          "titulo": "Tus excedentes",
+          "texto": "Compensación en tu factura."
+        },
+        {
+          "num": "04",
+          "titulo": "Bonificaciones",
+          "texto": "IBI e ICIO, según tu ayuntamiento."
+        }
+      ]
+    },
+    {
+      "tipo": "lista",
+      "titular": "Nosotros nos encargamos",
+      "destacado": "nos encargamos",
+      "items": [
+        {
+          "num": "01",
+          "titulo": "Estudiamos tu consumo",
+          "texto": "Y dimensionamos la instalación."
+        },
+        {
+          "num": "02",
+          "titulo": "Instalamos",
+          "texto": "Con instaladores de confianza."
+        },
+        {
+          "num": "03",
+          "titulo": "Tramitamos todo",
+          "texto": "Legalización, excedentes y tarifa."
+        }
+      ],
+      "cta": "Pide tu estudio de autoconsumo"
+    }
+  ],
+  "diapositivas_linkedin": [
+    {
+      "tipo": "portada",
+      "titular": "¿Tu empresa produce su propia energía?",
+      "destacado": "su propia energía?",
+      "subtitulo": "Autoconsumo solar para empresas",
+      "texto": "Naves, oficinas, hoteles y comercios."
+    },
+    {
+      "tipo": "lista",
+      "titular": "Por qué ahora",
+      "destacado": "ahora",
+      "items": [
+        {
+          "num": "01",
+          "titulo": "Consumo en horas de sol",
+          "texto": "Encaja con la actividad de muchas empresas."
+        },
+        {
+          "num": "02",
+          "titulo": "Menos dependencia del mercado",
+          "texto": "Parte de tu energía, producida por ti."
+        },
+        {
+          "num": "03",
+          "titulo": "Imagen sostenible",
+          "texto": "Cada vez más valorada por los clientes."
+        }
+      ]
+    },
+    {
+      "tipo": "lista",
+      "titular": "Proyecto llave en mano",
+      "destacado": "llave en mano",
+      "items": [
+        {
+          "num": "01",
+          "titulo": "Estudio de viabilidad",
+          "texto": "Con tu curva de consumo real."
+        },
+        {
+          "num": "02",
+          "titulo": "Instalación",
+          "texto": "Con instaladores de confianza."
+        },
+        {
+          "num": "03",
+          "titulo": "Trámites y seguimiento",
+          "texto": "Legalización, excedentes y tarifa."
+        }
+      ],
+      "cta": "Solicita tu estudio de viabilidad"
+    }
+  ],
+  "textos": {
+    "linkedin": "☀️ Muchas empresas consumen la mayor parte de su energía justo en las horas de sol. Y aun así siguen comprando toda esa energía a la red.\n\nEl autoconsumo solar permite producir parte de la electricidad que consume la empresa, reducir la dependencia del precio del mercado y reforzar su imagen sostenible. Pero un buen proyecto no empieza por los paneles: empieza por los datos.\n\nEn Solareia planteamos el autoconsumo como un proyecto llave en mano:\n\n🔹 Estudio de viabilidad con la curva de consumo real de la empresa.\n🔹 Dimensionamiento e instalación con instaladores de confianza.\n🔹 Legalización, compensación de excedentes y ajuste de la tarifa y la potencia al nuevo perfil.\n🔹 Seguimiento de la producción y de la factura.\n\n¿Vuestra empresa ha valorado ya el autoconsumo? ¿Qué os frena: la inversión, el espacio o los trámites?\n\n👉 Solicita el estudio de viabilidad para tu empresa.\n\n📩 info@wearesolareia.com · 📞 627 60 51 78\n\n#Solareia #Autoconsumo #EnergíaSolar #Empresas",
+    "facebook": "☀️ ¿Estás pensando en poner placas solares en casa o en tu negocio?\n\nAntes de instalar hay que calcular cuántos paneles necesitas según tu consumo, tramitar los permisos, legalizar la instalación, gestionar la compensación de excedentes y pedir las bonificaciones de IBI e ICIO si tu ayuntamiento las ofrece. ¡Mucho papeleo! 😅\n\nEn Solareia nos encargamos de todo: estudiamos tu consumo, instalamos con instaladores de confianza y tramitamos todo lo necesario.\n\n💬 ¿Qué es lo que más dudas te genera del autoconsumo?\n\n📩 info@wearesolareia.com · 📞 627 60 51 78\n\n#Solareia #PlacasSolares #Autoconsumo #EnergíaSolar",
+    "instagram": "☀️ ¿Piensas en poner placas solares?\n\nDetrás de una instalación hay:\n✅ Calcular los paneles según tu consumo\n✅ Permisos y legalización\n✅ Compensación de excedentes\n✅ Bonificaciones de IBI e ICIO (según ayuntamiento)\n\nDel estudio a los trámites, lo hacemos todo nosotros 💚 Pide tu estudio por mensaje directo.\n\n📩 info@wearesolareia.com · 📞 627 60 51 78\n\n#Solareia #PlacasSolares #Autoconsumo #EnergíaSolar #AhorroEnergético"
+  },
+  "fuentes": [
+    "Dossier de empresas de Solareia",
+    "https://www.idae.es/tecnologias/energias-renovables/uso-electrico/autoconsumo"
+  ]
+}

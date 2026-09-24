@@ -1,0 +1,124 @@
+{
+  "id": "2026-11-03-consejo-horarios",
+  "fecha": "2026-11-03",
+  "tipo": "consejo",
+  "categoria": "hogar",
+  "seccion": "Consejos",
+  "titulo": "¿Te compensa cambiar tus horarios de consumo? Te lo decimos",
+  "diapositivas": [
+    {
+      "tipo": "portada",
+      "titular": "¿Te compensa poner la lavadora de noche?",
+      "destacado": "de noche?",
+      "subtitulo": "Depende de más cosas de las que parece",
+      "texto": "Te lo decimos con tu factura."
+    },
+    {
+      "tipo": "lista",
+      "titular": "Depende de…",
+      "destacado": "Depende de…",
+      "items": [
+        {
+          "num": "01",
+          "titulo": "Tu tarifa",
+          "texto": "Con precio fijo, la hora no cambia nada."
+        },
+        {
+          "num": "02",
+          "titulo": "Tus tramos horarios",
+          "texto": "Punta, llano y valle."
+        },
+        {
+          "num": "03",
+          "titulo": "Lo que consumes y cuándo",
+          "texto": "Tu consumo real, hora a hora."
+        }
+      ]
+    },
+    {
+      "tipo": "lista",
+      "titular": "Déjalo en nuestras manos",
+      "destacado": "nuestras manos",
+      "items": [
+        {
+          "num": "01",
+          "titulo": "Nos envías tu factura",
+          "texto": "Por email o WhatsApp."
+        },
+        {
+          "num": "02",
+          "titulo": "Analizamos tu consumo",
+          "texto": "Por horas y con tu tarifa actual."
+        },
+        {
+          "num": "03",
+          "titulo": "Te decimos qué te compensa",
+          "texto": "Horarios y tarifa que mejor encajan."
+        }
+      ],
+      "cta": "Envíanos tu factura"
+    }
+  ],
+  "diapositivas_linkedin": [
+    {
+      "tipo": "portada",
+      "titular": "¿Tu empresa consume en las horas más caras?",
+      "destacado": "las horas más caras?",
+      "subtitulo": "El cuándo pesa tanto como el cuánto",
+      "texto": "Analizamos tu consumo cuarto a cuarto de hora."
+    },
+    {
+      "tipo": "lista",
+      "titular": "Lo que analizamos",
+      "destacado": "analizamos",
+      "items": [
+        {
+          "num": "01",
+          "titulo": "Tu curva de consumo",
+          "texto": "Datos cuartohorarios de la distribuidora."
+        },
+        {
+          "num": "02",
+          "titulo": "Procesos desplazables",
+          "texto": "Qué puede moverse sin afectar a la actividad."
+        },
+        {
+          "num": "03",
+          "titulo": "Tarifa y potencias por periodo",
+          "texto": "Si encajan con tu perfil real."
+        }
+      ]
+    },
+    {
+      "tipo": "lista",
+      "titular": "Cómo trabajamos",
+      "destacado": "trabajamos",
+      "items": [
+        {
+          "num": "01",
+          "titulo": "Obtenemos tus datos de consumo",
+          "texto": "Tú solo nos das la autorización."
+        },
+        {
+          "num": "02",
+          "titulo": "Hacemos el estudio",
+          "texto": "Consumo, tarifa y potencias."
+        },
+        {
+          "num": "03",
+          "titulo": "Proponemos y gestionamos",
+          "texto": "Cambios de tarifa, potencia y horarios."
+        }
+      ],
+      "cta": "Solicita el estudio de tu empresa"
+    }
+  ],
+  "textos": {
+    "linkedin": "⚡ En la factura eléctrica de una empresa, el cuándo pesa tanto como el cuánto.\n\nCon las tarifas de acceso 3.0TD y 6.1TD, la energía y la potencia no cuestan lo mismo en todos los periodos: las horas punta de los días laborables son las más caras y el valle (noches, fines de semana y festivos) el más barato. Por eso dos empresas con el mismo consumo anual pueden pagar facturas muy distintas.\n\nSaber si hay margen exige analizar la curva de consumo cuartohoraria, identificar qué procesos pueden desplazarse sin afectar a la actividad y comprobar si la tarifa y las potencias por periodo encajan con ese perfil. Es un trabajo técnico que casi nunca hay tiempo de hacer en el día a día.\n\nEn Solareia lo hacemos por ti: obtenemos tus datos de consumo, hacemos el estudio y gestionamos los cambios que tengan sentido.\n\n¿En vuestro sector es viable mover consumos a otras franjas o la actividad no lo permite?\n\n👉 Pide el estudio de consumo de tu empresa.\n\n📩 info@wearesolareia.com · 📞 627 60 51 78\n\n#Solareia #EficienciaEnergética #Empresas #GestiónEnergética",
+    "facebook": "🧺 ¿Te compensa poner la lavadora por la noche?\n\nLa respuesta corta: depende. De tu tarifa (con precio fijo las 24 h, la hora no cambia el precio), de tus tramos horarios y de lo que consumes y cuándo.\n\nNo hace falta que te vuelvas loco con las horas punta y valle 😉 Envíanos tu factura, analizamos tu consumo y te decimos qué te compensa de verdad y si tu tarifa es la adecuada.\n\n💬 ¿Tú ya cambias tus horarios para ahorrar? Cuéntanos.\n\n📩 info@wearesolareia.com · 📞 627 60 51 78\n\n#Solareia #AhorroEnergético #FacturaDeLaLuz",
+    "instagram": "🧺 ¿Te compensa poner la lavadora de noche?\n\nDepende de:\n✅ Tu tarifa\n✅ Tus tramos horarios\n✅ Lo que consumes y cuándo\n\n¿No quieres estar pendiente del reloj? Envíanos tu factura por mensaje directo y te decimos qué te compensa de verdad 💚\n\n📩 info@wearesolareia.com · 📞 627 60 51 78\n\n#Solareia #AhorroEnergético #FacturaDeLaLuz #ConsejosDeAhorro #Hogar"
+  },
+  "fuentes": [
+    "https://www.boe.es/buscar/doc.php?id=BOE-A-2020-1066"
+  ]
+}
