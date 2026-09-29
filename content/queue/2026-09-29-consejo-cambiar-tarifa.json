@@ -131,5 +131,30 @@
   "fuentes": [
     "https://www.cnmc.es/sites/default/files/editor_contenidos/Energia/Guias/CNMC_RECOM_CONSUMIDOR.pdf"
   ],
-  "validado": "2026-09-24 (Paula, en las tres redes)"
+  "validado": "2026-09-24 (Paula, en las tres redes)",
+  "publicaciones": {
+    "linkedin": {
+      "ok": false,
+      "error": "Falta el secreto LINKEDIN_ACCESS_TOKEN"
+    },
+    "facebook": {
+      "ok": false,
+      "error": "Falta el secreto FACEBOOK_PAGE_ID"
+    },
+    "instagram": {
+      "ok": false,
+      "error": "Falta el secreto FACEBOOK_PAGE_ID"
+    }
+  },
+  "estado": "pendiente de reintento",
+  "imagenes": [
+    "2026-09-29-consejo-cambiar-tarifa-1.jpg",
+    "2026-09-29-consejo-cambiar-tarifa-2.jpg",
+    "2026-09-29-consejo-cambiar-tarifa-3.jpg"
+  ],
+  "imagenes_linkedin": [
+    "2026-09-29-consejo-cambiar-tarifa-li-1.jpg",
+    "2026-09-29-consejo-cambiar-tarifa-li-2.jpg",
+    "2026-09-29-consejo-cambiar-tarifa-li-3.jpg"
+  ]
 }
